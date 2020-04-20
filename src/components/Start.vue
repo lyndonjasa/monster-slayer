@@ -50,6 +50,7 @@
   .action {
     text-align: center;
     margin-top: 25px;
+    font-family: AtariClassic;
   }
 }
 </style>

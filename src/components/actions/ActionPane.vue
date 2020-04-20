@@ -31,5 +31,7 @@ export default {
 <style lang="scss" scoped>
 .action-btn {
   margin: 5px;
+  font-size: 12px;
+  font-family: AtariClassic;
 }
 </style>

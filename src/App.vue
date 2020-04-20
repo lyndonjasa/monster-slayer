@@ -2,23 +2,27 @@
   <div id="app">
     <app-start v-if="showOverlay" @start="showOverlay = false"></app-start>
 
-    <app-battle></app-battle>
+    <app-form v-if="!hasAccount"></app-form>
+    <app-battle v-else></app-battle>
   </div>
 </template>
 
 <script>
 import Start from "./components/Start";
 import Battle from "./components/Battle";
+import Form from "./components/forms/Form";
 
 export default {
   name: 'app',
   components: {
     appStart: Start,
-    appBattle: Battle
+    appBattle: Battle,
+    appForm: Form
   },
   data () {
     return {
-      showOverlay: true
+      showOverlay: true,
+      hasAccount: false
     };
   }
 }

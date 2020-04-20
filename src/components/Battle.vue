@@ -222,6 +222,7 @@ export default {
       &.message-container {
         height: calc(100% - 10px);
         color: white;
+        font-family: AtariClassic;
       }
     }
   }
