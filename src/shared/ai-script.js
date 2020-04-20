@@ -1,3 +1,9 @@
+import { getRandomInt } from "./randomizer";
+
+/**
+ * @param {Array} skills Array of enemy skills.
+ * @param {Number} currentMana current mana.
+ */
 export function enemyAction(skills, currentMana) {
   const currentAction = getRandomInt(2);
 
@@ -26,8 +32,4 @@ export function enemyAction(skills, currentMana) {
       }
     }
   }
-}
-
-function getRandomInt(max) {
-  return Math.floor(Math.random() * Math.floor(max));
 }
