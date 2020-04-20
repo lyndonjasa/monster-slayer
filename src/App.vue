@@ -21,7 +21,7 @@ export default {
   },
   data () {
     return {
-      showOverlay: true,
+      showOverlay: false,
       hasAccount: false
     };
   }
