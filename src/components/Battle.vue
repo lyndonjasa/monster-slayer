@@ -36,7 +36,8 @@
 import Character from "./characters/Character";
 import ActionPane from "./actions/ActionPane";
 import { enemyAction } from "../shared/ai-script";
-import { player, enemy } from "../shared/characters";
+import { player, enemy, createPlayer } from "../shared/characters";
+import { loadFromStore } from "../shared/storage-helper";
 
 export default {
   components: {
@@ -51,6 +52,12 @@ export default {
       enemy,
       battleNotification: ''
     };
+  },
+  mounted: function() {
+    const gameAccount = loadFromStore("gameAccount");
+    if (gameAccount) {
+      this.player = createPlayer(gameAccount.character.classType, gameAccount.character.name);
+    }
   },
   methods: {
     onAttack: function() {

@@ -2,7 +2,10 @@
   <div id="app">
     <app-start v-if="showOverlay" @start="showOverlay = false"></app-start>
 
-    <app-form v-if="!hasAccount"></app-form>
+    <app-form 
+      v-if="!hasAccount"
+      @account-created="hasAccount = true">
+    </app-form>
     <app-battle v-else></app-battle>
   </div>
 </template>
@@ -11,6 +14,7 @@
 import Start from "./components/Start";
 import Battle from "./components/Battle";
 import Form from "./components/forms/Form";
+import { loadFromStore } from "./shared/storage-helper";
 
 export default {
   name: 'app',
@@ -21,9 +25,15 @@ export default {
   },
   data () {
     return {
-      showOverlay: false,
+      showOverlay: true,
       hasAccount: false
     };
+  },
+  mounted: function() {
+    const gameAccount = loadFromStore("gameAccount");
+    if (gameAccount) {
+      this.hasAccount = true;
+    }
   }
 }
 </script>

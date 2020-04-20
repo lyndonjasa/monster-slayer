@@ -1,3 +1,6 @@
+import { classTypes } from "./class-types";
+import { skillTree } from "./skill-tree";
+
 export const player = {
   actualHealth: 200,
   totalHealth: 200,
@@ -29,6 +32,27 @@ export const player = {
     }
   ]
 };
+
+export function createPlayer(classId, name) {
+  const player = {
+    actualHealth: 200,
+    totalHealth: 200,
+    isPlayer: true,
+    mana: 100,
+    totalMana: 100,
+    name,
+    showAlt: false
+  }
+
+  const classType = classTypes.find(x => x.id === classId);
+
+  player["image"] = `src/assets/images/classes/${classType.name}.png`;
+  player["altImage"] = `src/assets/images/classes/${classType.name}-blink.png`;
+
+  player["skills"] = skillTree.find(x => x.classId === classId).skills;
+
+  return player;
+}
 
 export const enemy = {
   actualHealth: 400,

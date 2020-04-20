@@ -42,6 +42,7 @@
 import AccountForm from "./AccountForm";
 import CharacterForm from "./CharacterForm";
 import { bus } from "../../shared/event-bus";
+import { saveToLocalStore } from "../../shared/storage-helper";
 
 export default {
   components: {
@@ -50,7 +51,7 @@ export default {
   },
   data: function() {
     return {
-      isOnAccountCreation: false,
+      isOnAccountCreation: true,
       gameAccount: {
         account: {
           fullName: "",
@@ -80,7 +81,8 @@ export default {
     },
     onCharacterSubmitted: function() {
       alert("character submitted");
-      console.log(this.gameAccount);
+      saveToLocalStore("gameAccount", this.gameAccount);
+      this.$emit("account-created");
     }
   }
 }
