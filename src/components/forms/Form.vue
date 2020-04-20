@@ -46,7 +46,7 @@ export default {
   },
   data: function() {
     return {
-      isOnAccountCreation: true,
+      isOnAccountCreation: false,
       gameAccount: {
         account: {
           fullName: "",
