@@ -7,7 +7,6 @@
         </div>
         <app-account-form 
           v-if="isOnAccountCreation"
-          :form-data="gameAccount.account"
           v-model="gameAccount.account"
           @account-submitted="onAccountSubmitted"
         >
@@ -19,16 +18,21 @@
           <span>Character Creation</span>
         </div>
 
-        <app-character-form></app-character-form>
+        <app-character-form
+          v-model="gameAccount.character"
+          @character-submitted="onCharacterSubmitted"
+        >
+        </app-character-form>
       </div>
     </div>
 
     <div class="form-footer row nomargin">
       <div class="col-sm-6 nopadding left">
-        <v-icon icon="angle-double-left" v-if="!isOnAccountCreation" />
+        <v-icon icon="angle-double-left" v-if="!isOnAccountCreation" @click="onAccountPrev" />
       </div>
       <div class="col-sm-6 nopadding right">
         <v-icon icon="angle-double-right" v-if="isOnAccountCreation" @click="onAccountNext" />
+        <v-icon icon="check-double" v-if="!isOnAccountCreation" @click="onCharacterCreation" />
       </div>
     </div>
   </div>
@@ -53,6 +57,10 @@ export default {
           email: "",
           username: "",
           password: "",
+        },
+        character: {
+          name: "",
+          classType: 0
         }
       },
     };
@@ -63,6 +71,16 @@ export default {
     },
     onAccountSubmitted: function() {
       this.isOnAccountCreation = false;
+    },
+    onAccountPrev: function() {
+      this.isOnAccountCreation = true;
+    },
+    onCharacterCreation: function() {
+      bus.$emit("on-character-creation");
+    },
+    onCharacterSubmitted: function() {
+      alert("character submitted");
+      console.log(this.gameAccount);
     }
   }
 }

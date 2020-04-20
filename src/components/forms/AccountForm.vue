@@ -7,8 +7,7 @@
           <input type="text" class="input-principal" v-model.lazy="fullName" @blur="$v.fullName.$touch()" />
         </div>
 
-        <div class="col-sm-4 nopadding form-label"></div>
-        <div class="col-sm-8 nopadding">
+        <div class="col-sm-8 offset-sm-4 nopadding">
           <p v-show="!$v.fullName.required && $v.fullName.$dirty">Full Name is required</p>
         </div>
       </div>
@@ -19,8 +18,7 @@
           <input type="text" class="input-principal" v-model.lazy="email" @blur="$v.email.$touch()" />
         </div>
 
-        <div class="col-sm-4 nopadding form-label"></div>
-        <div class="col-sm-8 nopadding">
+        <div class="col-sm-8 offset-sm-4 nopadding">
           <p v-show="!$v.email.required && $v.email.$dirty">Email is required</p>
         </div>
       </div>
@@ -31,8 +29,7 @@
           <input type="text" class="input-principal" v-model.lazy="username" @blur="$v.username.$touch()" />
         </div>
 
-        <div class="col-sm-4 nopadding form-label"></div>
-        <div class="col-sm-8 nopadding">
+        <div class="col-sm-8 offset-sm-4 nopadding">
           <p v-show="!$v.username.required && $v.username.$dirty">Username is required</p>
           <p v-show="!$v.username.minLength && $v.username.$dirty">Username must be at least 6 characters</p>
         </div>
@@ -44,8 +41,7 @@
           <input type="password" class="input-principal" v-model.lazy="password" @blur="$v.password.$touch()" />
         </div>
 
-        <div class="col-sm-4 nopadding form-label"></div>
-        <div class="col-sm-8 nopadding">
+        <div class="col-sm-8 offset-sm-4 nopadding">
           <p v-show="!$v.password.required && $v.password.$dirty">Password is required</p>
           <p v-show="!$v.password.minLength && $v.username.$dirty">Password must be at least 6 characters</p>
         </div>
