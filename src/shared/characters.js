@@ -28,7 +28,7 @@ export const enemy = {
   isPlayer: false,
   mana: 200,
   totalMana: 200,
-  name: 'Dragon of Shmargonrog',
+  name: 'Black Dragon',
   image: 'src/assets/images/black-dragon.png',
   altImage: 'src/assets/images/black-dragon-blink.png',
   showAlt: false,
