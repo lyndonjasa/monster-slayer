@@ -92,7 +92,7 @@ export const skillTree = [
     ]
   },
   {
-    classId: 4,
+    classId: 5,
     skills: [
       {
         name: 'Red Blaze',
