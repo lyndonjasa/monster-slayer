@@ -14,7 +14,8 @@
     <div class="character-actions row nomargin">
       <div class="col-sm-6 nopadding">
         <div class="actions">
-          <app-action-pane 
+          <app-action-pane
+            v-show="!enemyTurn"
             :skills="player.skills"
             @attack="onAttack"
             @focus="onFocus"
@@ -35,6 +36,7 @@
 import Character from "./characters/Character";
 import ActionPane from "./actions/ActionPane";
 import { enemyAction } from "../shared/ai-script";
+import { player, enemy } from "../shared/characters";
 
 export default {
   components: {
@@ -44,68 +46,9 @@ export default {
   data() {
     return {
       enemyAction: 0,
-      player: {
-        actualHealth: 200,
-        totalHealth: 200,
-        isPlayer: true,
-        mana: 100,
-        totalMana: 100,
-        name: 'Warrior of Light',
-        image: 'src/assets/images/warrior.png',
-        altImage: 'src/assets/images/warrior-blink.png',
-        showAlt: false,
-        skills: [
-          {
-            name: 'Dash Slash',
-            damage: 25,
-            cost: 20,
-            target: 'enemy'
-          },
-          {
-            name: 'Iai Strike',
-            damage: 75,
-            cost: 50,
-            target: 'enemy'
-          },
-          {
-            name: 'Heal',
-            damage: -50,
-            cost: 30,
-            target: 'self'
-          }
-        ]
-      },
-      enemy: {
-        actualHealth: 400,
-        totalHealth: 400,
-        isPlayer: false,
-        mana: 200,
-        totalMana: 200,
-        name: 'Black Dragon of Apocalypse',
-        image: 'src/assets/images/black-dragon.png',
-        altImage: 'src/assets/images/black-dragon-blink.png',
-        showAlt: false,
-        skills: [
-          {
-            name: 'Dragon Claw',
-            damage: 35,
-            cost: 30,
-            target: 'enemy'
-          },
-          {
-            name: 'Dragon Breath',
-            damage: 75,
-            cost: 50,
-            target: 'enemy'
-          },
-          {
-            name: 'Mega Flare',
-            damage: 125,
-            cost: 150,
-            target: 'enemy'
-          }
-        ]
-      },
+      enemyTurn: false,
+      player,
+      enemy,
       battleNotification: ''
     };
   },
@@ -114,6 +57,7 @@ export default {
       this.enemy.actualHealth -= 10;
       this.writeBattleMessage(`${this.player.name} attacked! Dealt 10 hit points!`);
       this.animateAction(this.player);
+      this.enemyTurn = true;
 
       this.enemyAction = setTimeout(() => this.triggerEnemyAction(), 3000);
       this.enemyAction;
@@ -127,6 +71,7 @@ export default {
 
       this.writeBattleMessage(`${this.player.name} focused! Regained 20 mana!`);
       this.animateAction(this.player);
+      this.enemyTurn = true;
 
       this.enemyAction = setTimeout(() => this.triggerEnemyAction(), 3000);
       this.enemyAction;
@@ -152,6 +97,7 @@ export default {
 
       this.writeBattleMessage(`${this.player.name} used ${skill.name}! ${action} ${Math.abs(skill.damage)} hit points!`);
       this.animateAction(this.player);
+      this.enemyTurn = true;
 
       this.enemyAction = setTimeout(() => this.triggerEnemyAction(), 3000);
       this.enemyAction;
@@ -191,6 +137,8 @@ export default {
         this.writeBattleMessage(`${this.enemy.name} used ${skillUsed.name}! ${action} ${Math.abs(skillUsed.damage)} hit points!`);
         this.animateAction(this.enemy);
       }
+
+      setTimeout(() => this.enemyTurn = false, 3000);
     },
     writeBattleMessage: function(message) {
       if (this.player.actualHealth <= 0) {
@@ -269,6 +217,7 @@ export default {
       border-radius: 5px;
       margin: 5px;
       padding: 5px;
+      min-height: 128px;
 
       &.message-container {
         height: calc(100% - 10px);
