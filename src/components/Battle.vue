@@ -1,5 +1,5 @@
 <template>
-  <div class="battlefield-container">
+  <div class="battlefield-container" v-if="player">
     <div class="battlefield">
       <div class="row nomargin">
         <div class="col-sm-6 nopadding">
