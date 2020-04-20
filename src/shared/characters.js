@@ -1,38 +1,6 @@
 import { classTypes } from "./class-types";
 import { skillTree } from "./skill-tree";
 
-export const player = {
-  actualHealth: 200,
-  totalHealth: 200,
-  isPlayer: true,
-  mana: 100,
-  totalMana: 100,
-  name: 'Warrior of Light',
-  image: 'src/assets/images/warrior.png',
-  altImage: 'src/assets/images/warrior-blink.png',
-  showAlt: false,
-  skills: [
-    {
-      name: 'Dash Slash',
-      damage: 25,
-      cost: 20,
-      target: 'enemy'
-    },
-    {
-      name: 'Iai Strike',
-      damage: 75,
-      cost: 50,
-      target: 'enemy'
-    },
-    {
-      name: 'Heal',
-      damage: -50,
-      cost: 30,
-      target: 'self'
-    }
-  ]
-};
-
 export function createPlayer(classId, name) {
   const player = {
     actualHealth: 200,

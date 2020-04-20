@@ -36,7 +36,7 @@
 import Character from "./characters/Character";
 import ActionPane from "./actions/ActionPane";
 import { enemyAction } from "../shared/ai-script";
-import { player, enemy, createPlayer } from "../shared/characters";
+import { enemy, createPlayer } from "../shared/characters";
 import { loadFromStore } from "../shared/storage-helper";
 
 export default {
@@ -48,7 +48,7 @@ export default {
     return {
       enemyAction: 0,
       enemyTurn: false,
-      player,
+      player: undefined,
       enemy,
       battleNotification: ''
     };

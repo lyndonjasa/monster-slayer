@@ -13,6 +13,8 @@
 
             <div class="col-sm-6 offset-sm-4 nopadding">
               <p v-if="!$v.characterName.required && $v.characterName.$dirty">Character Name is required</p>
+              <p v-if="!$v.characterName.minLength && $v.characterName.$dirty">Name must be at least 6 characters</p>
+              <p v-if="!$v.characterName.maxLength && $v.characterName.$dirty">Name must be at most 20 characters</p>
             </div>
           </div>
 
