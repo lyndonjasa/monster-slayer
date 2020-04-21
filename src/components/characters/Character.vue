@@ -12,6 +12,7 @@
       <img class="character-image" 
           :src="!character.showAlt ? character.image : character.altImage"
           :class="{ 'player-image' : character.isPlayer, 'enemy-image': !character.isPlayer }"
+          :style="{ left: leftAlign }"
       />
     </div>
   </div>
@@ -25,6 +26,11 @@ export default {
     appHealthBar: HealthBar
   },
   props: ["character"],
+  data: function() {
+    return {
+      leftAlign: "0px"
+    }
+  },
   computed: {
     remainingHealthPercentage: function() {
       return (this.character.actualHealth / this.character.totalHealth);
@@ -32,6 +38,15 @@ export default {
     remainingManaPercentage: function() {
       return (this.character.mana / this.character.totalMana);
     }
+  },
+  mounted: function() {
+    setTimeout(() => {
+      const selector = this.character.isPlayer ? ".player-image" : ".enemy-image";
+      const image = document.querySelector(selector);
+      const leftPosition = (400 - image.clientWidth) / 2;
+
+      this.leftAlign = leftPosition + "px";
+    }, 50);
   }
 }
 </script>
@@ -39,19 +54,19 @@ export default {
 <style lang="scss" scoped>
 .character-image-container {
   text-align: center;
+  height: 327px;
 }
 
 .character-image {
-  text-align: center;
+  position: absolute;
+  bottom: 70px;
 
   &.player-image {
-    margin-top: 175px;
-    height: 75px;
+    max-height: 75px;
   }
 
   &.enemy-image {
-    height: 250px;
-    margin-top: 25px;
+    max-height: 250px;
   }
 }
 </style>

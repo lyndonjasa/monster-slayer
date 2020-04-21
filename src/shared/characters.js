@@ -29,8 +29,8 @@ export const enemy = {
   mana: 200,
   totalMana: 200,
   name: 'Black Dragon',
-  image: 'src/assets/images/black-dragon.png',
-  altImage: 'src/assets/images/black-dragon-blink.png',
+  image: 'src/assets/images/enemies/black-dragon.png',
+  altImage: 'src/assets/images/enemies/black-dragon-blink.png',
   showAlt: false,
   skills: [
     {
