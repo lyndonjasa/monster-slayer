@@ -6,7 +6,8 @@
       v-if="!hasAccount"
       @account-created="loadAccount">
     </app-form>
-    <app-battle v-else
+    <app-battle
+      v-else-if="hasAccount && playerAccount"
       :player="playerAccount">
     </app-battle>
   </div>
@@ -28,7 +29,7 @@ export default {
   },
   data () {
     return {
-      showOverlay: true,
+      showOverlay: false,
       hasAccount: false,
       playerAccount: undefined
     };

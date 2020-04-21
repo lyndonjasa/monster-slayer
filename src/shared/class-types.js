@@ -46,7 +46,7 @@ export const classTypes = [
     name: "Berserker",
     image: 'src/assets/images/classes/berserker.png',
     details: "Mad warriors who trade speed for strength and extreme tankiness",
-    weapons: "Bludgeons",
+    weapons: "Hammers/Bludgeons",
     stats: {
       off: "A",
       def: "S",

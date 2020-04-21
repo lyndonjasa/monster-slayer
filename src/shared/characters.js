@@ -14,8 +14,8 @@ export function createPlayer(classId, name) {
 
   const classType = classTypes.find(x => x.id === classId);
 
-  player["image"] = `src/assets/images/classes/${classType.name}.png`;
-  player["altImage"] = `src/assets/images/classes/${classType.name}-blink.png`;
+  player["image"] = `src/assets/images/classes/animated/${classType.name}.png`;
+  player["altImage"] = `src/assets/images/classes/animated/${classType.name}-alt.png`;
 
   player["skills"] = skillTree.find(x => x.classId === classId).skills;
 
