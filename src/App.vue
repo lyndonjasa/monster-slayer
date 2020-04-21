@@ -4,9 +4,11 @@
 
     <app-form 
       v-if="!hasAccount"
-      @account-created="hasAccount = true">
+      @account-created="loadAccount">
     </app-form>
-    <app-battle v-else></app-battle>
+    <app-battle v-else
+      :player="playerAccount">
+    </app-battle>
   </div>
 </template>
 
@@ -15,6 +17,7 @@ import Start from "./components/Start";
 import Battle from "./components/Battle";
 import Form from "./components/forms/Form";
 import { loadFromStore } from "./shared/storage-helper";
+import { createPlayer } from "./shared/characters";
 
 export default {
   name: 'app',
@@ -26,13 +29,20 @@ export default {
   data () {
     return {
       showOverlay: true,
-      hasAccount: false
+      hasAccount: false,
+      playerAccount: undefined
     };
   },
   mounted: function() {
-    const gameAccount = loadFromStore("gameAccount");
-    if (gameAccount) {
-      this.hasAccount = true;
+    this.loadAccount();
+  },
+  methods: {
+    loadAccount: function() {
+      const gameAccount = loadFromStore("gameAccount");
+      if (gameAccount) {
+        this.hasAccount = true;
+        this.playerAccount = createPlayer(gameAccount.character.classType, gameAccount.character.name);
+      }
     }
   }
 }

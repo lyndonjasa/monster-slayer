@@ -25,7 +25,7 @@
       </div>
       <div class="col-sm-6 nopadding">
         <div class="actions message-container">
-          {{ battleNotification }}
+          {{ notification }}
         </div>
       </div>
     </div>
@@ -36,28 +36,23 @@
 import Character from "./characters/Character";
 import ActionPane from "./actions/ActionPane";
 import { enemyAction } from "../shared/ai-script";
-import { enemy, createPlayer } from "../shared/characters";
+import { enemy } from "../shared/characters";
 import { loadFromStore } from "../shared/storage-helper";
+import TypewriterMixin from "../mixins/TypewriterMixin";
 
 export default {
   components: {
     appCharacter: Character,
     appActionPane: ActionPane
   },
+  props: ["player"],
+  mixins: [TypewriterMixin],
   data() {
     return {
       enemyAction: 0,
       enemyTurn: false,
-      player: undefined,
-      enemy,
-      battleNotification: ''
+      enemy
     };
-  },
-  mounted: function() {
-    const gameAccount = loadFromStore("gameAccount");
-    if (gameAccount) {
-      this.player = createPlayer(gameAccount.character.classType, gameAccount.character.name);
-    }
   },
   methods: {
     onAttack: function() {
@@ -156,19 +151,7 @@ export default {
         message += ` ${this.enemy.name} has been obliterated!`;
       }
 
-      let i = 0;
-      let vm = this;
-      this.battleNotification = '';
-
-      function typeWriter() {
-        if (i < message.length) {
-          vm.battleNotification += message.charAt(i);
-          i++;
-          setTimeout(typeWriter, 30);
-        }
-      }
-      
-      typeWriter();
+      this.writeNotification(message);
     },
     animateAction: function(character) {
       var interval = setInterval(() => {
