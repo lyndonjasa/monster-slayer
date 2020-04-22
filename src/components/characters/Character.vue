@@ -40,13 +40,14 @@ export default {
     }
   },
   mounted: function() {
+    debugger
     setTimeout(() => {
       const selector = this.character.isPlayer ? ".player-image" : ".enemy-image";
       const image = document.querySelector(selector);
       const leftPosition = (400 - image.clientWidth) / 2;
 
       this.leftAlign = leftPosition + "px";
-    }, 50);
+    }, 100);
   }
 }
 </script>

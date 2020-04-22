@@ -20,6 +20,7 @@
 
         <div class="col-sm-8 offset-sm-4 nopadding">
           <p v-show="!$v.email.required && $v.email.$dirty">Email is required</p>
+          <p v-show="!$v.email.email && $v.email.$dirty">Invalid email</p>
         </div>
       </div>
 
