@@ -1,12 +1,18 @@
 <template>
   <div class="app-form">
+    <app-loader v-if="isLoading"></app-loader>
+
     <div class="login-form">
       <div class="form-container" v-if="isOnLoginScreen">
         <div class="form-header">
           <span>Login</span>
         </div>
 
-        <app-login-form @sign-up="isOnLoginScreen = false"></app-login-form>
+        <app-login-form 
+          @sign-up="isOnLoginScreen = false"
+          @on-login="login($event)"
+        >
+        </app-login-form>
       </div>
     </div>
     <div class="creation-form" v-if="!isOnLoginScreen">
@@ -69,6 +75,7 @@ export default {
     return {
       isOnLoginScreen: true,
       isOnAccountCreationForm: true,
+      isLoading: false,
       gameAccount: {
         account: {
           fullName: "",
@@ -100,7 +107,7 @@ export default {
       this.isOnLoginScreen = true;
     },
     onCharacterSubmitted: function() {
-      debugger
+      this.isLoading = true;
       const accountData = {
         fullName: this.gameAccount.account.fullName,
         email: this.gameAccount.account.email,
@@ -111,9 +118,13 @@ export default {
       };
 
       this.createAccount(accountData).then(response => {
-        alert("character submitted");
         this.$emit("account-created");
+        this.isLoading = false;
+        alert("character submitted");
       });
+    },
+    login: function(accountId) {
+      this.$emit("on-login", accountId);
     }
   }
 }

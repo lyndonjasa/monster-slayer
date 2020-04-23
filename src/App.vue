@@ -1,10 +1,12 @@
 <template>
   <div id="app">
     <app-start v-if="showOverlay" @start="showOverlay = false"></app-start>
+    <app-loader v-if="isLoading"></app-loader>
 
     <app-form 
       v-if="!hasAccount"
-      @account-created="loadAccount">
+      @account-created="loadAccount"
+      @on-login="loadAccount($event)">
     </app-form>
     <app-battle
       v-else-if="hasAccount && playerAccount"
@@ -18,7 +20,8 @@ import Start from "./components/Start";
 import Battle from "./components/Battle";
 import Form from "./components/forms/Form";
 import { loadFromStore } from "./shared/storage-helper";
-import { createPlayer } from "./shared/characters";
+import { createPlayer, extractPlayer } from "./shared/characters";
+import AccountMixin from "./mixins/AccoutMixin";
 
 export default {
   name: 'app',
@@ -27,23 +30,24 @@ export default {
     appBattle: Battle,
     appForm: Form
   },
+  mixins: [AccountMixin],
   data () {
     return {
       showOverlay: false,
       hasAccount: false,
-      playerAccount: undefined
+      playerAccount: undefined,
+      isLoading: false
     };
   },
-  mounted: function() {
-    this.loadAccount();
-  },
   methods: {
-    loadAccount: function() {
-      const gameAccount = loadFromStore("gameAccount");
-      if (gameAccount) {
+    loadAccount: function(accountId) {
+      this.isLoading = true;
+      this.getCharacter(accountId).then(response => {
         this.hasAccount = true;
-        this.playerAccount = createPlayer(gameAccount.character.classType, gameAccount.character.name);
-      }
+        this.playerAccount = extractPlayer(response);
+
+        this.isLoading = false;
+      });
     }
   }
 }

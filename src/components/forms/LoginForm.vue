@@ -1,5 +1,7 @@
 <template>
-  <div class="login-container" @submit.prevent="onFormSubmit">
+  <div class="login-container">
+    <app-loader v-if="isLoading"></app-loader>
+
     <form>
       <div class="login-form-control">
         <input type="text" 
@@ -13,7 +15,7 @@
 
       <div class="login-form-control">
         <input 
-          type="text" 
+          type="password" 
           class="input-principal" 
           placeholder="Password" 
           v-model="password"
@@ -21,6 +23,8 @@
           @blur="$v.password.$touch()"
         />
       </div>
+
+      <button style="display: none" @click.prevent="onFormSubmit">Submit</button>
     </form>
 
     <div class="login-form-control actions">
@@ -41,7 +45,8 @@ export default {
     return {
       username: "",
       password: "",
-      errorMessage: ""
+      errorMessage: "",
+      isLoading: false
     }
   },
   mixins: [AccountMixin],
@@ -54,16 +59,20 @@ export default {
       this.$v.$touch();
 
       if (!this.$v.$error) {
-        const vm = this;
+
+        this.isLoading = true;
         this.login(this.username, this.password).then(response => {
           if (response.data) {
-            alert("Successful Login");
-            vm.resetForm();
+            this.isLoading = false;
+            this.resetForm();
+            this.$emit("on-login", response.data.accountId);
           }
         }, err => {
           if (err.body.code === 404) {
-            vm.errorMessage = err.body.error;
+            this.errorMessage = err.body.error;
           }
+
+          this.isLoading = false;
         });
       }
     },

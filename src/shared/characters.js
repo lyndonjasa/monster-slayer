@@ -22,6 +22,28 @@ export function createPlayer(classId, name) {
   return player;
 }
 
+export function extractPlayer(character) {
+  debugger
+  const player = {
+    actualHealth: character.stats.health,
+    totalHealth: character.stats.health,
+    isPlayer: true,
+    mana: character.stats.mana,
+    totaMana: character.stats.mana,
+    name: character.name,
+    showAlt: false
+  }
+
+  const classType = classTypes.find(x => x.id === character.classType);
+
+  player["image"] = `src/assets/images/classes/animated/${classType.name}.png`;
+  player["altImage"] = `src/assets/images/classes/animated/${classType.name}-alt.png`;
+
+  player["skills"] = character.skills
+
+  return player;
+}
+
 export const enemy = {
   actualHealth: 400,
   totalHealth: 400,
