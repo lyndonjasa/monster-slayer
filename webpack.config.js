@@ -1,13 +1,23 @@
 var path = require('path')
 var webpack = require('webpack')
+const CopyPlugin = require('copy-webpack-plugin')
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 
 module.exports = {
+  optimization: {
+    minimizer: [new UglifyJsPlugin()]
+  },
   entry: './src/main.js',
   output: {
     path: path.resolve(__dirname, './dist'),
     publicPath: '/dist/',
     filename: 'build.js'
   },
+  plugins: [
+    new CopyPlugin([
+      { from: 'src/assets/images', to: 'images' }
+    ])
+  ],
   module: {
     rules: [
       { test: /\.(woff|woff2|eot|ttf|svg|otf)$/, loader: 'url-loader?limit=100000' },
@@ -94,12 +104,6 @@ if (process.env.NODE_ENV === 'production') {
     new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: '"production"'
-      }
-    }),
-    new webpack.optimize.UglifyJsPlugin({
-      sourceMap: true,
-      compress: {
-        warnings: false
       }
     }),
     new webpack.LoaderOptionsPlugin({

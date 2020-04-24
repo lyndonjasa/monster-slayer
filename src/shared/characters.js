@@ -14,8 +14,8 @@ export function createPlayer(classId, name) {
 
   const classType = classTypes.find(x => x.id === classId);
 
-  player["image"] = `src/assets/images/classes/animated/${classType.name}.png`;
-  player["altImage"] = `src/assets/images/classes/animated/${classType.name}-alt.png`;
+  player["image"] = `dist/images/classes/animated/${classType.name}.png`;
+  player["altImage"] = `dist/images/classes/animated/${classType.name}-alt.png`;
 
   player["skills"] = skillTree.find(x => x.classId === classId).skills;
 
@@ -29,15 +29,15 @@ export function extractPlayer(character) {
     totalHealth: character.stats.health,
     isPlayer: true,
     mana: character.stats.mana,
-    totaMana: character.stats.mana,
+    totalMana: character.stats.mana,
     name: character.name,
     showAlt: false
   }
 
   const classType = classTypes.find(x => x.id === character.classType);
 
-  player["image"] = `src/assets/images/classes/animated/${classType.name}.png`;
-  player["altImage"] = `src/assets/images/classes/animated/${classType.name}-alt.png`;
+  player["image"] = `dist/images/classes/animated/${classType.name}.png`;
+  player["altImage"] = `dist/images/classes/animated/${classType.name}-alt.png`;
 
   player["skills"] = character.skills
 
@@ -51,8 +51,8 @@ export const enemy = {
   mana: 200,
   totalMana: 200,
   name: 'Black Dragon',
-  image: 'src/assets/images/enemies/black-dragon.png',
-  altImage: 'src/assets/images/enemies/black-dragon-blink.png',
+  image: 'dist/images/enemies/black-dragon.png',
+  altImage: 'dist/images/enemies/black-dragon-blink.png',
   showAlt: false,
   skills: [
     {

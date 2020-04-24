@@ -2,19 +2,19 @@
   <div class="loading-screen-overlay">
     <div class="loading-screen">
       <div class="animated-images" v-if="inanimate">
-        <img src="../../assets/images/classes/saber.png" />
-        <img src="../../assets/images/classes/archer.png" />
-        <img src="../../assets/images/classes/lancer.png" />
-        <img src="../../assets/images/classes/berserker.png" />
-        <img src="../../assets/images/classes/caster.png" />
+        <img src="dist/images/classes/saber.png" />
+        <img src="dist/images/classes/archer.png" />
+        <img src="dist/images/classes/lancer.png" />
+        <img src="dist/images/classes/berserker.png" />
+        <img src="dist/images/classes/caster.png" />
       </div>
 
       <div class="animated-images" v-else>
-        <img src="../../assets/images/classes/saber-blink.png" />
-        <img src="../../assets/images/classes/archer-blink.png" />
-        <img src="../../assets/images/classes/lancer-blink.png" />
-        <img src="../../assets/images/classes/berserker-blink.png" />
-        <img src="../../assets/images/classes/caster-blink.png" />
+        <img src="dist/images/classes/saber-blink.png" />
+        <img src="dist/images/classes/archer-blink.png" />
+        <img src="dist/images/classes/lancer-blink.png" />
+        <img src="dist/images/classes/berserker-blink.png" />
+        <img src="dist/images/classes/caster-blink.png" />
       </div>
 
       <div class="loading-message" v-if="inanimate">
