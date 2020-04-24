@@ -2,6 +2,7 @@ var path = require('path')
 var webpack = require('webpack')
 const CopyPlugin = require('copy-webpack-plugin')
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
+const ImageminPlugin = require('imagemin-webpack-plugin').default
 
 module.exports = {
   optimization: {
@@ -16,7 +17,14 @@ module.exports = {
   plugins: [
     new CopyPlugin([
       { from: 'src/assets/images', to: 'images' }
-    ])
+    ]),
+    new ImageminPlugin({
+      test: /\.(jpe?g|png|gif|svg)$/i,
+      disable: process.env.NODE_ENV !== 'production', // Disable during development
+      pngquant: {
+        quality: '95-100'
+      }
+    })
   ],
   module: {
     rules: [
