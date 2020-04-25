@@ -40,7 +40,6 @@ export default {
     }
   },
   mounted: function() {
-    debugger
     setTimeout(() => {
       const selector = this.character.isPlayer ? ".player-image" : ".enemy-image";
       const image = document.querySelector(selector);

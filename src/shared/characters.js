@@ -34,10 +34,10 @@ export function extractPlayer(character) {
     showAlt: false
   }
 
-  const classType = classTypes.find(x => x.id === character.classType);
+  const className = classTypes.find(x => x.id === character.classType).name.toLowerCase();
 
-  player["image"] = `dist/images/classes/animated/${classType.name}.png`;
-  player["altImage"] = `dist/images/classes/animated/${classType.name}-alt.png`;
+  player["image"] = `dist/images/classes/animated/${className}.png`;
+  player["altImage"] = `dist/images/classes/animated/${className}-alt.png`;
 
   player["skills"] = character.skills
 

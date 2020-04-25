@@ -1,5 +1,8 @@
 <script>
-const accountsBaseUrl = "http://localhost:3000/accounts";
+import config from "../config";
+
+// const accountsBaseUrl = "http://localhost:3000/accounts";
+const accountsBaseUrl = `${config.apiUrl}/accounts`;
 
 export default {
   methods: {

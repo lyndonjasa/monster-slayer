@@ -62,6 +62,7 @@ export default {
 
         this.isLoading = true;
         this.login(this.username, this.password).then(response => {
+          debugger
           if (response.data) {
             this.isLoading = false;
             this.resetForm();
