@@ -120,7 +120,6 @@ export default {
       this.createAccount(accountData).then(response => {
         this.$emit("account-created", response.accountId);
         this.isLoading = false;
-        alert("character submitted");
       });
     },
     login: function(accountId) {
