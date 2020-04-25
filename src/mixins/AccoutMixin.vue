@@ -12,7 +12,7 @@ export default {
     login: function(username, password) {
       const url = `${accountsBaseUrl}/login`;
 
-      return this.$http.post(url, { username, password });
+      return this.$http.post(url, { username, password }).then(response => response.json());
     },
     getCharacter: function(accountId) {
       const url = `${accountsBaseUrl}/${accountId}/character`;

@@ -23,7 +23,6 @@ export function createPlayer(classId, name) {
 }
 
 export function extractPlayer(character) {
-  debugger
   const player = {
     actualHealth: character.stats.health,
     totalHealth: character.stats.health,

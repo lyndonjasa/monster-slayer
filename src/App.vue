@@ -5,7 +5,7 @@
 
     <app-form 
       v-if="!hasAccount"
-      @account-created="loadAccount"
+      @account-created="loadAccount($event)"
       @on-login="loadAccount($event)">
     </app-form>
     <app-battle

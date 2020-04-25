@@ -63,10 +63,10 @@ export default {
         this.isLoading = true;
         this.login(this.username, this.password).then(response => {
           debugger
-          if (response.data) {
+          if (response) {
             this.isLoading = false;
             this.resetForm();
-            this.$emit("on-login", response.data.accountId);
+            this.$emit("on-login", response.accountId);
           }
         }, err => {
           if (err.body.code === 404) {
