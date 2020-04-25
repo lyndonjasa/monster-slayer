@@ -7,7 +7,7 @@ const accountsBaseUrl = `${config.apiUrl}/accounts`;
 export default {
   methods: {
     createAccount: function(account) {
-      return this.$http.post(accountsBaseUrl, account);
+      return this.$http.post(accountsBaseUrl, account).then(response => response.json());
     },
     login: function(username, password) {
       const url = `${accountsBaseUrl}/login`;
