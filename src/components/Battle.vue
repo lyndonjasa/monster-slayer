@@ -156,12 +156,12 @@ export default {
     animateAction: function(character) {
       var interval = setInterval(() => {
         character.showAlt = !character.showAlt;
-      }, 100);
+      }, 250);
 
       setTimeout(() => {
         clearInterval(interval);
         character.showAlt = false;
-      }, 400);
+      }, 1000);
     }
   },
   watch: {

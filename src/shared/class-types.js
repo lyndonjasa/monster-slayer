@@ -2,7 +2,7 @@ export const classTypes = [
   {
     id: 1,
     name: "Saber",
-    image: 'src/assets/images/classes/saber.png',
+    image: 'dist/images/classes/saber.png',
     details: "Agile and powerful melee warriors adept at swordsmanship",
     weapons: "Swords",
     stats: {
@@ -16,7 +16,7 @@ export const classTypes = [
   {
     id: 2,
     name: "Archer",
-    image: 'src/assets/images/classes/archer.png',
+    image: 'dist/images/classes/archer.png',
     details: "A highly effective scout that deals very powerful piercing strikes",
     weapons: "Bow and Arrow",
     stats: {
@@ -30,7 +30,7 @@ export const classTypes = [
   {
     id: 3,
     name: "Lancer",
-    image: 'src/assets/images/classes/lancer.png',
+    image: 'dist/images/classes/lancer.png',
     details: "Very agile warrior that excels on speed and continuous strikes",
     weapons: "Spears/Polearms",
     stats: {
@@ -44,7 +44,7 @@ export const classTypes = [
   {
     id: 4,
     name: "Berserker",
-    image: 'src/assets/images/classes/berserker.png',
+    image: 'dist/images/classes/berserker.png',
     details: "Mad warriors who trade speed for strength and extreme tankiness",
     weapons: "Hammers/Bludgeons",
     stats: {
@@ -58,7 +58,7 @@ export const classTypes = [
   {
     id: 5,
     name: "Caster",
-    image: 'src/assets/images/classes/caster.png',
+    image: 'dist/images/classes/caster.png',
     details: "Has low combat abilities but capitalizes on destructive magecraft",
     weapons: "Staffs",
     stats: {
