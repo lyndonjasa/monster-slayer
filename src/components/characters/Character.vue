@@ -14,6 +14,10 @@
           :class="{ 'player-image' : character.isPlayer, 'enemy-image': !character.isPlayer }"
           :style="{ left: leftAlign }"
       />
+      <img class="character-image-alt" 
+          :src="character.altImage"
+          style="display: none"
+      />
     </div>
   </div>
 </template>
@@ -40,13 +44,18 @@ export default {
     }
   },
   mounted: function() {
-    setTimeout(() => {
-      const selector = this.character.isPlayer ? ".player-image" : ".enemy-image";
-      const image = document.querySelector(selector);
-      const leftPosition = (400 - image.clientWidth) / 2;
+    this.$nextTick(() => {
+      const img = new Image();
+      img.src = this.character.image;
 
-      this.leftAlign = leftPosition + "px";
-    }, 100);
+      img.onload = () => {
+        const selector = this.character.isPlayer ? ".player-image" : ".enemy-image";
+        const image = document.querySelector(selector);
+        const leftPosition = (400 - image.clientWidth) / 2;
+        // comment
+        this.leftAlign = leftPosition + "px";
+      };
+    });
   }
 }
 </script>
