@@ -18,11 +18,11 @@
       </div>
 
       <div class="loading-message" v-if="inanimate">
-        Now Loading . . .
+        {{ loadingMessage }} . . .
       </div>
 
       <div class="loading-message" v-else>
-        Now Loading &nbsp; &nbsp; &nbsp;
+        {{ loadingMessage }} &nbsp; &nbsp; &nbsp;
       </div>
     </div>
   </div>
@@ -30,6 +30,12 @@
 
 <script>
 export default {
+  props: {
+    loadingMessage: {
+      type: String,
+      default: "Now Loading"
+    }
+  },
   data: function() {
     return {
       inanimate: true
@@ -57,6 +63,7 @@ export default {
   background-color: rgba(0,0,0,0.5); /* Black background with opacity */
   z-index: 5; /* Specify a stack order in case you're using a different order for other elements */
   overflow: auto;
+  color: #E4E1CB;
 
   .loading-screen {
     width: 700px;

@@ -1,5 +1,7 @@
 <template>
   <div class="battlefield-container" v-if="player">
+    <app-loader v-if="showLoader" loadingMessage="Loading battlefield"></app-loader>
+
     <div class="battlefield">
       <div class="row nomargin">
         <div class="col-sm-6 nopadding">
@@ -39,6 +41,7 @@ import { enemyAction } from "../shared/ai-script";
 import { enemy } from "../shared/characters";
 import { loadFromStore } from "../shared/storage-helper";
 import TypewriterMixin from "../mixins/TypewriterMixin";
+import { loadImages } from "../shared/image-loader";
 
 export default {
   components: {
@@ -47,11 +50,19 @@ export default {
   },
   props: ["player"],
   mixins: [TypewriterMixin],
+  created: function() {
+    this.showLoader = true;
+    const images = [this.player.image, this.player.altImage, this.enemy.image, this.enemy.altImage]
+    loadImages(images).then(() => {
+      this.showLoader = false;
+    });
+  },
   data() {
     return {
       enemyAction: 0,
       enemyTurn: false,
-      enemy
+      enemy,
+      showLoader: false
     };
   },
   methods: {
@@ -156,12 +167,12 @@ export default {
     animateAction: function(character) {
       var interval = setInterval(() => {
         character.showAlt = !character.showAlt;
-      }, 250);
+      }, 150);
 
       setTimeout(() => {
         clearInterval(interval);
         character.showAlt = false;
-      }, 1000);
+      }, 600);
     }
   },
   watch: {
