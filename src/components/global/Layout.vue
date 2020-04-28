@@ -71,7 +71,7 @@ export default {
   }
 
   .app-body {
-    height: 450px;
+    height: 448px;
   }
 }
 </style>

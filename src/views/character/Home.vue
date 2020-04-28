@@ -2,7 +2,7 @@
   <app-layout headerText="Character Status">
     <div class="character-home-screen row nomargin">
       <div class="col-sm-4 nopadding" v-if="character">
-        Details Goes Here
+        <app-character-details :character="character"></app-character-details>
       </div>
 
       <div class="col-sm-8 nopadding" v-if="character">
@@ -16,13 +16,19 @@
 import { mapGetters } from "vuex";
 import { store } from "../../store";
 import AccountMixin from "../../mixins/AccoutMixin";
+import CharacterDetails from "../../components/character/CharacterDetails";
 
 export default {
+  components: {
+    appCharacterDetails: CharacterDetails
+  },
   created: function() {
     this.showLoader = true;
     this.getCharacter(this.account).then(res => {
       this.showLoader = false;
       this.character = res;
+
+      console.log(res);
       store.commit("setCharacter", res._id);
     });
   },
@@ -40,3 +46,9 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+.character-home-screen {
+  height: 100%;
+}
+</style>
