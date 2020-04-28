@@ -9,7 +9,7 @@ let routes = [{
 }];
 
 // add routes here
-routes = routes.concat(LoginRoutes);
+routes.push(...LoginRoutes);
 
 export default new VueRouter({
   mode: "hash",

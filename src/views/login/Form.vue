@@ -118,12 +118,16 @@ export default {
       };
 
       this.createAccount(accountData).then(response => {
-        this.$emit("account-created", response.accountId);
         this.isLoading = false;
+        alert("Account has been created");
+        this.isOnLoginScreen = true;
+        this.isOnAccountCreationForm = true;
       });
     },
     login: function(accountId) {
-      this.$emit("on-login", accountId);
+      alert(accountId);
+      this.$store.commit("setAccount", accountId);
+      console.log(this.$store.getters.account);
     }
   }
 }

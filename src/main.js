@@ -10,6 +10,7 @@ import VueResource from "vue-resource";
 import "./components/global/global-component";
 import VueRouter from "vue-router";
 import router from "./views/routes";
+import { store } from "./store/store";
 
 library.add(fas);
 Vue.component('v-icon', FontAwesomeIcon);
@@ -20,6 +21,7 @@ Vue.use(VueRouter);
 
 new Vue({
   router,
+  store,
   el: '#app',
   render: h => h(App)
 })
