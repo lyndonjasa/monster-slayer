@@ -49,7 +49,6 @@ export default {
   width: 800px;
   min-height: 555px;
   color: #E4E1CB;
-  background-image: url("../../assets/images/main_bg.png");
   margin: auto;
 
   .app-links {
@@ -69,6 +68,10 @@ export default {
     text-align: center;
     font-family: Target3D;
     font-size: 24px;
+  }
+
+  .app-body {
+    height: 450px;
   }
 }
 </style>

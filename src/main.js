@@ -10,7 +10,7 @@ import VueResource from "vue-resource";
 import "./components/global/global-component";
 import VueRouter from "vue-router";
 import router from "./views/routes";
-import { store } from "./store/store";
+import { store } from "./store";
 
 library.add(fas);
 Vue.component('v-icon', FontAwesomeIcon);

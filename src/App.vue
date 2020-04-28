@@ -38,6 +38,11 @@ export default {
       account: "account"
     })
   },
+  created: function() {
+    if (this.account) {
+      this.showOverlay = false;
+    }
+  },
   data () {
     return {
       showOverlay: true,
@@ -68,6 +73,8 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   min-width: 800px;
+  background-image: url("./assets/images/main_bg.png");
+  background-position: center;
 
   .white-overlay {
     position: fixed;
