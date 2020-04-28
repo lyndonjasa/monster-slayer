@@ -6,7 +6,7 @@
       </div>
 
       <div class="col-sm-8 nopadding" v-if="character">
-        Stats Goes Here
+        <app-character-stats :character="character"></app-character-stats>
       </div>
     </div>
   </app-layout>
@@ -17,10 +17,12 @@ import { mapGetters } from "vuex";
 import { store } from "../../store";
 import AccountMixin from "../../mixins/AccoutMixin";
 import CharacterDetails from "../../components/character/CharacterDetails";
+import CharacterStats from "../../components/character/CharacterStats";
 
 export default {
   components: {
-    appCharacterDetails: CharacterDetails
+    appCharacterDetails: CharacterDetails,
+    appCharacterStats: CharacterStats
   },
   created: function() {
     this.showLoader = true;
