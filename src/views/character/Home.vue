@@ -1,5 +1,7 @@
 <template>
   <app-layout headerText="Character Status">
+    <app-loader v-if="showLoader" loadingMessage="Loading Character"></app-loader>
+
     <div class="character-home-screen row nomargin">
       <div class="col-sm-4 nopadding" v-if="character">
         <app-character-details :character="character"></app-character-details>
@@ -14,7 +16,6 @@
 
 <script>
 import { mapGetters } from "vuex";
-import { store } from "../../store";
 import AccountMixin from "../../mixins/AccoutMixin";
 import CharacterDetails from "../../components/character/CharacterDetails";
 import CharacterStats from "../../components/character/CharacterStats";
@@ -30,8 +31,7 @@ export default {
       this.showLoader = false;
       this.character = res;
 
-      console.log(res);
-      store.commit("setCharacter", res._id);
+      this.$store.commit("setCharacter", res._id);
     });
   },
   computed: {

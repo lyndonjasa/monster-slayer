@@ -125,9 +125,8 @@ export default {
       });
     },
     login: function(accountId) {
-      alert(accountId);
       this.$store.commit("setAccount", accountId);
-      console.log(this.$store.getters.account);
+      this.$router.push('/character');
     }
   }
 }
