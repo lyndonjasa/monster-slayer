@@ -57,9 +57,9 @@
 </template>
 
 <script>
-import AccountForm from "./AccountForm";
-import CharacterForm from "./CharacterForm";
-import LoginForm from "./LoginForm";
+import AccountForm from "../../components/forms/AccountForm";
+import CharacterForm from "../../components/forms/CharacterForm";
+import LoginForm from "../../components/forms/LoginForm";
 import { bus } from "../../shared/event-bus";
 import { saveToLocalStore } from "../../shared/storage-helper";
 import AccountMixin from "../../mixins/AccoutMixin";

@@ -8,14 +8,18 @@ import { fas } from '@fortawesome/free-solid-svg-icons';
 import Vuelidate from "vuelidate";
 import VueResource from "vue-resource";
 import "./components/global/global-component";
+import VueRouter from "vue-router";
+import router from "./views/routes";
 
 library.add(fas);
 Vue.component('v-icon', FontAwesomeIcon);
 
 Vue.use(Vuelidate);
 Vue.use(VueResource);
+Vue.use(VueRouter);
 
 new Vue({
+  router,
   el: '#app',
   render: h => h(App)
 })
