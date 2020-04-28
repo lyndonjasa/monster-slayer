@@ -1,7 +1,9 @@
 <template>
-  <div class="character-home-screen">
-    Dungeon Home Screen works!
-  </div>
+  <app-layout>
+    <div class="character-home-screen">
+      Dungeon Home Screen works!
+    </div>
+  </app-layout>
 </template>
 
 <script>

@@ -68,7 +68,6 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   min-width: 800px;
-  min-height: 610px;
 
   .white-overlay {
     position: fixed;
