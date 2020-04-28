@@ -1,5 +1,5 @@
 <template>
-  <app-layout>
+  <app-layout headerText="Character Status">
     <div class="character-home-screen">
       Character Home Screen works!
     </div>

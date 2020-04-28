@@ -16,6 +16,6 @@ routes.push(...CharacterRoutes);
 routes.push(...DungeonRoutes);
 
 export default new VueRouter({
-  mode: "hash",
+  mode: "history",
   routes
 });

@@ -1,5 +1,5 @@
 <template>
-  <app-layout>
+  <app-layout headerText="Dungeons">
     <div class="character-home-screen">
       Dungeon Home Screen works!
     </div>

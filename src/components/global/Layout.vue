@@ -24,6 +24,10 @@
       </router-link>
     </div>
 
+    <div class="app-header">
+      {{ headerText }}
+    </div>
+
     <div class="app-body">
       <slot></slot>
     </div>
@@ -32,6 +36,11 @@
 
 <script>
 export default {
+  props: {
+    headerText: {
+      required: true
+    } 
+  }
 }
 </script>
 
@@ -43,14 +52,23 @@ export default {
   background-image: url("../../assets/images/main_bg.png");
   margin: auto;
 
-  button {
-    font-family: AtariClassic;
+  .app-links {
+    button {
+      font-family: AtariClassic;
+    }
+
+    .active-route {
+      background-color: white;
+      color: black;
+      border-color: black;
+    }
   }
 
-  .active-route {
-    background-color: white;
-    color: black;
-    border-color: black;
+  .app-header {
+    height: 30px;
+    text-align: center;
+    font-family: Target3D;
+    font-size: 24px;
   }
 }
 </style>
