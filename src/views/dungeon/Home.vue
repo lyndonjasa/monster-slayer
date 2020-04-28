@@ -1,6 +1,6 @@
 <template>
   <div class="character-home-screen">
-    Character Home Screen works!
+    Dungeon Home Screen works!
   </div>
 </template>
 

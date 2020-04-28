@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <app-start v-if="showOverlay" @start="showOverlay = false"></app-start>
-    <div class="white-overlay"></div>
+    <div v-if="!account" class="white-overlay"></div>
 
     <router-view />
     <!-- <app-form 
@@ -23,6 +23,7 @@ import Form from "./views/login/Form";
 import { loadFromStore } from "./shared/storage-helper";
 import { createPlayer, extractPlayer } from "./shared/characters";
 import AccountMixin from "./mixins/AccoutMixin";
+import { mapGetters } from "vuex";
 
 export default {
   name: 'app',
@@ -32,6 +33,11 @@ export default {
     appForm: Form
   },
   mixins: [AccountMixin],
+  computed: {
+    ...mapGetters({
+      account: "account"
+    })
+  },
   data () {
     return {
       showOverlay: true,
