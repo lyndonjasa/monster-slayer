@@ -77,3 +77,11 @@ input:focus, textarea:focus, select:focus {
   fill: currentColor;
   stroke: none;
 }
+
+.white-border {
+  height: 100%;
+  border: 2px solid white;
+  margin: 3px;
+  border-radius: 8px;
+  padding: 2px;
+}
