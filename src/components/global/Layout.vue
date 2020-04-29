@@ -47,7 +47,7 @@ export default {
 <style lang="scss" scoped>
 .app-base-layout {
   width: 800px;
-  min-height: 555px;
+  min-height: 610px;
   color: #E4E1CB;
   margin: auto;
 

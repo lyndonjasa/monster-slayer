@@ -68,7 +68,7 @@
 </template>
 
 <script>
-import { classTypes } from "../../shared/class-types";
+import { classTypes } from "../../../shared/class-types";
 
 export default {
   props: {

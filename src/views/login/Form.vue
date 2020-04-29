@@ -137,8 +137,8 @@ export default {
   position: relative;
   z-index: 5;
   width: 800px;
-  height: 554px;
-  margin: auto;
+  height: 550px;
+  margin: 30px auto 30px auto;
   background-image: url("../../assets/images/form-background.png");
   background-repeat: no-repeat;
   background-size: contain;

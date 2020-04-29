@@ -75,6 +75,7 @@ export default {
   min-width: 800px;
   background-image: url("./assets/images/main_bg.png");
   background-position: center;
+  overflow: auto;
 
   .white-overlay {
     position: fixed;

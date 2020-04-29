@@ -17,8 +17,8 @@
 <script>
 import { mapGetters } from "vuex";
 import AccountMixin from "../../mixins/AccoutMixin";
-import CharacterDetails from "../../components/character/CharacterDetails";
-import CharacterStats from "../../components/character/CharacterStats";
+import CharacterDetails from "../../components/character/home/CharacterDetails";
+import CharacterStats from "../../components/character/home/CharacterStats";
 
 export default {
   components: {
