@@ -28,7 +28,12 @@ input:focus, textarea:focus, select:focus {
   border: 3px solid white;
 }
 
-.btn-principal:hover {
+.btn-principal:disabled {
+  color: gray;
+  border-color: gray;
+}
+
+.btn-principal:hover:enabled {
   color: black;
   background: white;
 }

@@ -5,8 +5,8 @@ Vue.use(Vuex);
 
 export const store = new Vuex.Store({
   state: {
-    accountId: "5ea8f058e928dc5ad8d2fb4f",
-    characterId: "5ea8f058e928dc5ad8d2fb50"
+    accountId: "5ea98aebda11384fb4cbbd22",
+    characterId: "5ea98aebda11384fb4cbbd23"
   },
   getters: {
     account: (state) => {

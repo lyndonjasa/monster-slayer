@@ -24,8 +24,22 @@
       </router-link>
     </div>
 
-    <div class="app-header">
-      {{ headerText }}
+    <div class="app-header row nomargin">
+      <div class="col-sm-2 left">
+        <v-icon class="header-router" 
+          v-if="prevRoute" 
+          icon="angle-double-left"
+          @click="reRoute(prevRoute)">
+        </v-icon>
+      </div>
+      <div class="col-sm-8">{{ headerText }}</div>
+      <div class="col-sm-2">
+        <v-icon class="header-router" 
+          v-if="nextRoute" 
+          icon="angle-double-right"
+          @click="reRoute(nextRoute)">
+        </v-icon>
+      </div>
     </div>
 
     <div class="app-body">
@@ -39,7 +53,18 @@ export default {
   props: {
     headerText: {
       required: true
-    } 
+    },
+    prevRoute: {
+      default: undefined
+    },
+    nextRoute: {
+      default: undefined
+    }
+  },
+  methods: {
+    reRoute: function(route) {
+      this.$router.push(route);
+    }
   }
 }
 </script>
@@ -68,6 +93,10 @@ export default {
     text-align: center;
     font-family: Target3D;
     font-size: 24px;
+
+    .header-router {
+      cursor: pointer;
+    }
   }
 
   .app-body {

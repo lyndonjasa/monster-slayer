@@ -1,5 +1,5 @@
 <template>
-  <app-layout headerText="Inventory">
+  <app-layout headerText="Inventory" prevRoute="/character">
     <app-loader v-if="showLoader" :loadingMessage="loadingMessage"></app-loader>
 
     <div class="character-inventory row nomargin">
@@ -13,9 +13,12 @@
         </app-tile>
       </div>
       <div class="col-sm-4 nopadding">
-        <app-tile>
-          Item Details here
-        </app-tile>
+        <app-item-details headerText="Selected Item" :item="selected"></app-item-details>
+        <app-item-details headerText="Current Equipment" :item="currentItem"></app-item-details>
+        <div class="inventory-actions">
+          <button class="btn-principal" :disabled="disableEquipButton">Equip</button>
+          <button class="btn-principal">Save</button>
+        </div>
       </div>
     </div>
   </app-layout>
@@ -25,10 +28,12 @@
 import { mapGetters } from "vuex";
 import CharacterMixin from "../../mixins/CharacterMixin";
 import ItemTile from "../../components/character/inventory/ItemTile";
+import ItemDetails from "../../components/character/inventory/ItemDetails";
 
 export default {
   components: {
-    appItemTile: ItemTile
+    appItemTile: ItemTile,
+    appItemDetails: ItemDetails
   },
   created: function() {
     this.showLoader = true;
@@ -63,11 +68,30 @@ export default {
         height: "448px",
         color: "#E4E1CB"
       };
+    },
+    disableEquipButton: function() {
+      if (!this.selectedItem) return true;
+      return this.selected.classId !== this.character.classType;
+    },
+    selected: function() {
+      if (!this.selectedItem) return undefined;
+      else return this.selectedItem.item;
+    },
+    currentItem: function() {
+      if (!this.selectedItem) return undefined;
+      else {
+        const type = this.selectedItem.item.type;
+        if (type === "WPN") {
+          return this.character.equipment.weapon;
+        } else {
+          return this.character.equipment.armor;
+        }
+      }
     }
   },
   watch: {
     selectedItem: function(value) {
-      console.log(value.item.name);
+      console.log(value);
     }
   }
 }
@@ -81,6 +105,16 @@ export default {
     height: 448px;
     overflow-y: scroll;
     overflow-x: hidden;
+  }
+
+  .inventory-actions {
+    margin-top: 10px;
+    font-family: AtariClassic;
+    text-align: center;
+
+    button {
+      width: 200px; 
+    }
   }
 }
 </style>
