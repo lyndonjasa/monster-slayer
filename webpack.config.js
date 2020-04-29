@@ -15,11 +15,8 @@ module.exports = {
     filename: 'build.js'
   },
   plugins: [
-    new CopyPlugin([
-      { from: 'src/assets/images', to: 'images' }
-    ]),
     new ImageminPlugin({
-      test: /\.(jpe?g|png|gif|svg)$/i,
+      test: /\.(jpe?g|png|gif|svg)/i,
       disable: process.env.NODE_ENV !== 'production', // Disable during development
       pngquant: {
         quality: '95-100'
@@ -83,6 +80,7 @@ module.exports = {
         test: /\.(png|jpg|gif|svg)$/,
         loader: 'file-loader',
         options: {
+          outputPath: 'images',
           name: '[name].[ext]?[hash]'
         }
       }
