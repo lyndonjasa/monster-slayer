@@ -1,0 +1,11 @@
+/* eslint-disable */
+require('./ARCHER-AMR')
+require('./ARCHER-WPN')
+require('./BERSERKER-AMR')
+require('./BERSERKER-WPN')
+require('./CASTER-AMR')
+require('./CASTER-WPN')
+require('./LANCER-AMR')
+require('./LANCER-WPN')
+require('./SABER-AMR')
+require('./SABER-WPN')

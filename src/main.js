@@ -11,6 +11,8 @@ import "./components/global/global-component";
 import VueRouter from "vue-router";
 import router from "./views/routes";
 import { store } from "./store";
+import VueSVGIcon from "vue-svgicon";
+import "./assets/icons";
 
 library.add(fas);
 Vue.component('v-icon', FontAwesomeIcon);
@@ -18,6 +20,9 @@ Vue.component('v-icon', FontAwesomeIcon);
 Vue.use(Vuelidate);
 Vue.use(VueResource);
 Vue.use(VueRouter);
+Vue.use(VueSVGIcon, {
+  tagName: "v-svg"
+});
 
 new Vue({
   router,

@@ -2,7 +2,7 @@
   <div class="character-stats-container">
     <div class="character-stats row nomargin">
       <div class="col-sm-3 nopadding center">
-        <img class="character-image" :src="characterImage" />
+        <img class="character-image" :src="characterClass.image" />
       </div>
       <div class="col-sm-9">
         <div class="center">Character Stats</div>
@@ -27,10 +27,16 @@
         <div class="center bold">Equipment</div>
         <div class="row nomargin">
           <div class="col-sm-10 offset-sm-2 bold">Weapon</div>
-          <div class="col-sm-8 offset-sm-4">{{ weapon.name }}</div>
+          <div class="col-sm-8 offset-sm-4">
+            <v-svg :icon="characterClass.name.toUpperCase() + '-WPN'"></v-svg>
+            {{ weapon.name }}
+          </div>
 
           <div class="col-sm-10 offset-sm-2 bold">Armor</div>
-          <div class="col-sm-8 offset-sm-4">{{ armor.name }}</div>
+          <div class="col-sm-8 offset-sm-4">
+            <v-svg :icon="characterClass.name.toUpperCase() + '-AMR'"></v-svg>
+            {{ armor.name }}
+          </div>
         </div>
       </div>
 
@@ -101,10 +107,10 @@ export default {
 
       return totalStats;
     },
-    characterImage: function() {
+    characterClass: function() {
       const classType = classTypes.find(x => x.id == this.character.classType);
 
-      return classType.image;
+      return classType;
     },
     weapon: function() {
       return this.character.equipment.weapon;
