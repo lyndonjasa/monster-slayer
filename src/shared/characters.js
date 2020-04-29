@@ -34,9 +34,9 @@ export function extractPlayer(character) {
   }
 
   const className = classTypes.find(x => x.id === character.classType).name.toLowerCase();
-
-  player["image"] = `dist/images/classes/animated/${className}.png`;
-  player["altImage"] = `dist/images/classes/animated/${className}-alt.png`;
+  debugger
+  player["image"] = require(`../assets/images/classes/animated/${className}-atk.png`);
+  player["altImage"] = require(`../assets/images/classes/animated/${className}-alt.png`);
 
   player["skills"] = character.skills
 
@@ -50,8 +50,8 @@ export const enemy = {
   mana: 200,
   totalMana: 200,
   name: 'Black Dragon',
-  image: 'dist/images/enemies/black-dragon.png',
-  altImage: 'dist/images/enemies/black-dragon-blink.png',
+  image: require('../assets/images/enemies/black-dragon.png'),
+  altImage: require('../assets/images/enemies/black-dragon-blink.png'),
   showAlt: false,
   skills: [
     {
