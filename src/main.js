@@ -13,6 +13,7 @@ import router from "./views/routes";
 import { store } from "./store";
 import VueSVGIcon from "vue-svgicon";
 import "./assets/icons";
+import VueSlimScroll from "vue-slimscroll";
 
 library.add(fas);
 Vue.component('v-icon', FontAwesomeIcon);
@@ -23,6 +24,7 @@ Vue.use(VueRouter);
 Vue.use(VueSVGIcon, {
   tagName: "v-svg"
 });
+Vue.use(VueSlimScroll);
 
 new Vue({
   router,
