@@ -21,8 +21,12 @@
         <app-item-details headerText="Selected Item" :item="selected"></app-item-details>
         <app-item-details headerText="Current Equipment" :item="currentItem"></app-item-details>
         <div class="inventory-actions">
-          <button class="btn-principal" :disabled="disableEquipButton">Equip</button>
-          <button class="btn-principal">Save</button>
+          <button class="btn-principal" 
+            :disabled="disableEquipButton"
+            @click="onEquip">Equip</button>
+          <button class="btn-principal"
+            :disabled="!hasChanges"
+            @click="onSave">Save</button>
         </div>
       </div>
     </div>
@@ -34,6 +38,7 @@ import { mapGetters } from "vuex";
 import CharacterMixin from "../../mixins/CharacterMixin";
 import ItemTile from "../../components/character/inventory/ItemTile";
 import ItemDetails from "../../components/character/inventory/ItemDetails";
+import _ from "lodash";
 
 export default {
   components: {
@@ -46,6 +51,7 @@ export default {
 
     this.getCharacterById(this.characterId).then(res => {
       this.character = res;
+      this.charCopy = _.cloneDeep(this.character);
 
       this.loadingMessage = "Loading Inventory";
       this.getInventory(this.characterId).then(res => {
@@ -61,7 +67,8 @@ export default {
       character: undefined,
       loadingMessage: "",
       inventory: [],
-      selectedItem: undefined
+      selectedItem: undefined,
+      charCopy: undefined
     };
   },
   computed: {
@@ -92,11 +99,32 @@ export default {
           return this.character.equipment.armor;
         }
       }
+    },
+    hasChanges: function() {
+      return !_.isEqual(this.character, this.charCopy);
     }
   },
-  watch: {
-    selectedItem: function(value) {
-      console.log(value);
+  methods: {
+    onEquip: function() {
+      const type = this.selected.type;
+      if (type === "WPN") {
+        this.character.equipment.weapon = this.selected;
+      } else {
+        this.character.equipment.armor = this.selected;
+      }
+    },
+    onSave: function() {
+      const request = {
+        weaponId: this.character.equipment.weapon._id,
+        armorId: this.character.equipment.armor._id,
+      }
+
+      this.loadingMessage = "Uploading Equipment";
+      this.showLoader = true;
+      this.updateEquipment(this.characterId, request).then(() => {
+        this.showLoader = false;
+        this.charCopy = _.cloneDeep(this.character);
+      });
     }
   }
 }

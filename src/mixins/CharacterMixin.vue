@@ -10,6 +10,9 @@ export default {
     },
     getInventory: function(characterId) {
       return this.$http.get(`${baseUrl}/${characterId}/inventory`).then(res => res.json());
+    },
+    updateEquipment: function(characterId, request) {
+      return this.$http.put(`${baseUrl}/${characterId}/equipment`, request);
     }
   }
 }
