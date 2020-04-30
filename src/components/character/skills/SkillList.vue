@@ -11,7 +11,9 @@
             {{ skills[index].name }}
           </div>
           <div class="col-sm-2 right">
-            <v-icon icon="times"></v-icon>
+            <v-icon v-if="skills.length > 1" icon="times" 
+              class="skill-list-action" @click="onSkillRemoval(skills[index]._id)">
+            </v-icon>
           </div>
         </template>
         <template v-else>
@@ -42,6 +44,9 @@ export default {
       } else {
         return "MAGICAL";
       }
+    },
+    onSkillRemoval: function(id) {
+      this.$emit("remove-skill", id);
     }
   }
 }
@@ -50,5 +55,18 @@ export default {
 <style lang="scss" scoped>
 .skill-list {
   height: 150px;
+
+  .center.bold {
+    margin-bottom: 10px;
+  }
+
+  .skill-list-action {
+    color: gray;
+    cursor: pointer;
+  }
+
+  .skill-list-action:hover {
+    color: #E4E1CB;
+  }
 }
 </style>
