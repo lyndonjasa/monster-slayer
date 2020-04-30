@@ -4,7 +4,9 @@
 
     <div class="dungeon-home-screen row nomargin">
       <div class="col-sm-6 nopadding">
-        <app-dungeon-list></app-dungeon-list>
+        <app-dungeon-list>
+          <app-dungeon-tile v-for="dungeon in dungeons" :key="dungeon._id" :dungeon="dungeon"></app-dungeon-tile>
+        </app-dungeon-list>
       </div>
 
       <div class="col-sm-6 nopadding">
@@ -17,13 +19,15 @@
 <script>
 import { mapGetters } from "vuex";
 import CharacterMixin from "../../mixins/CharacterMixin";
-import DungeonDetails from "../../components/dungeon/DungeonDetails";
-import DungeonList from "../../components/dungeon/DungeonList";
+import DungeonDetails from "../../components/dungeon/home/DungeonDetails";
+import DungeonList from "../../components/dungeon/home/DungeonList";
+import DungeonTile from "../../components/dungeon/home/DungeonTile";
 
 export default {
   components: {
     appDungeonDetails: DungeonDetails,
-    appDungeonList: DungeonList
+    appDungeonList: DungeonList,
+    appDungeonTile: DungeonTile
   },
   created: function() {
     this.showLoader = true;
