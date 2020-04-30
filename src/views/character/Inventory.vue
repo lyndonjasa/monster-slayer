@@ -5,10 +5,15 @@
     <div class="character-inventory row nomargin">
       <div class="col-sm-8 nopadding">
         <app-tile>
-          <div class="row nomargin item-tiles-container" v-slimscroll="slimScrollOptions">
-            <div v-for="item in inventory" :key="item._id" class="col-sm-6">
+          <div class="row nomargin item-tiles-container" v-if="inventory.length <= 16">
+            <div v-for="item in inventory" :key="item._id" class="col-sm-6 tile">
               <app-item-tile :item="item" v-model="selectedItem"></app-item-tile>
-            </div>
+            </div> 
+          </div>
+          <div class="row nomargin item-tiles-container" v-else v-slimscroll="slimScrollOptions">
+            <div v-for="item in inventory" :key="item._id" class="col-sm-6 tile">
+              <app-item-tile :item="item" v-model="selectedItem"></app-item-tile>
+            </div> 
           </div>
         </app-tile>
       </div>
@@ -102,9 +107,11 @@ export default {
   height: 100%;
 
   .item-tiles-container {
-    height: 448px;
-    overflow-y: scroll;
-    overflow-x: hidden;
+    max-height: 448px;
+
+    .tile {
+      height: 50px;
+    }
   }
 
   .inventory-actions {
