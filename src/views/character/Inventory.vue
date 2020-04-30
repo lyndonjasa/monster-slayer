@@ -130,7 +130,7 @@ export default {
         armorId: this.character.equipment.armor._id,
       }
 
-      this.loadingMessage = "Uploading Equipment";
+      this.loadingMessage = "Updating Equipment";
       this.showLoader = true;
       this.updateEquipment(this.characterId, request).then(() => {
         this.showLoader = false;

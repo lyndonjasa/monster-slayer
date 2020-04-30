@@ -105,7 +105,7 @@ export default {
       this.character.skills.push(this.selectedSkill);
     },
     onSave: function() {
-      this.loadingMessage = "Uploading Skills";
+      this.loadingMessage = "Updating Skills";
       this.showLoader = true;
 
       const skills = this.character.skills.map(x => x._id);
