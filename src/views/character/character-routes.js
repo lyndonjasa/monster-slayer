@@ -1,5 +1,6 @@
 import CharacterHome from "./Home";
 import Inventory from "./Inventory";
+import Skills from "./Skills";
 
 const routes = [
   {
@@ -9,6 +10,10 @@ const routes = [
   {
     path: "/character/inventory",
     component: Inventory
+  },
+  {
+    path: "/character/skills",
+    component: Skills
   }
 ];
 

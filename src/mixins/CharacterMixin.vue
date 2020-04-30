@@ -13,6 +13,9 @@ export default {
     },
     updateEquipment: function(characterId, request) {
       return this.$http.put(`${baseUrl}/${characterId}/equipment`, request);
+    },
+    getCharacterSkills: function(characterId) {
+      return this.$http.get(`${baseUrl}/${characterId}/skills`).then(res => res.json());
     }
   }
 }
