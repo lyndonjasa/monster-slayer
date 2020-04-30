@@ -5,7 +5,10 @@
     <div class="dungeon-home-screen row nomargin">
       <div class="col-sm-6 nopadding">
         <app-dungeon-list>
-          <app-dungeon-tile v-for="dungeon in dungeons" :key="dungeon._id" :dungeon="dungeon"></app-dungeon-tile>
+          <app-dungeon-tile v-for="dungeon in dungeons" :key="dungeon._id" 
+            :dungeon="dungeon"
+            v-model="selectedDungeon">
+          </app-dungeon-tile>
         </app-dungeon-list>
       </div>
 
@@ -49,6 +52,11 @@ export default {
     ...mapGetters({
       characterId: "character"
     })
+  },
+  watch: {
+    selectedDungeon: function(value) {
+      console.log(value);
+    }
   }
 }
 </script>

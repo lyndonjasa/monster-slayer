@@ -1,6 +1,7 @@
 <template>
   <div class="dungeon-tile" 
-    :style="{ backgroundImage: `url(${backgroundImage})` }">
+    :style="{ backgroundImage: `url(${backgroundImage})` }"
+    @click="onDungeonClick">
     <img :src="overlayImage" class="locked-overlay" v-if="dungeon.locked" />
   </div>
 </template>
