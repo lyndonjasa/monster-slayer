@@ -16,7 +16,10 @@ export default {
     },
     getCharacterSkills: function(characterId) {
       return this.$http.get(`${baseUrl}/${characterId}/skills`).then(res => res.json());
-    }
+    },
+    updateSkills: function(characterId, request) {
+      return this.$http.put(`${baseUrl}/${characterId}/skills`, request);
+    },
   }
 }
 </script>

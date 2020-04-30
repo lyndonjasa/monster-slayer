@@ -73,6 +73,7 @@ export default {
     },
     disableEquipButton: function() {
       if (!this.selectedSkill) return true;
+      if (this.skills.length >= 4) return true;
 
       const id = this.selectedSkill._id;
       const skill = this.character.skills.find(x => x._id === id);
@@ -83,6 +84,8 @@ export default {
       }
     },
     warningMessage: function() {
+      if (this.skills.length >= 4) return "Cannot equip any more skills";
+
       if (!this.selectedSkill) return "Select a skill to equip";
       else return "Skill is already equipped"; 
     }
@@ -102,7 +105,14 @@ export default {
       this.character.skills.push(this.selectedSkill);
     },
     onSave: function() {
+      this.loadingMessage = "Uploading Skills";
+      this.showLoader = true;
 
+      const skills = this.character.skills.map(x => x._id);
+      this.updateSkills(this.characterId, skills).then(() => {
+        this.charCopy = _.cloneDeep(this.character);
+        this.showLoader = false;
+      });
     },
     onRemove: function(skillId) {
       this.character.skills = this.character.skills.filter(x => x._id !== skillId);
