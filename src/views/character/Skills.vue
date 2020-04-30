@@ -13,7 +13,7 @@
       </div>
       <div class="col-sm-4 nopadding">
         <app-skill-details :skill="selectedSkill"></app-skill-details>
-        <app-skill-list></app-skill-list>
+        <app-skill-list :skills="skills"></app-skill-list>
       </div>
     </div>
   </app-layout>

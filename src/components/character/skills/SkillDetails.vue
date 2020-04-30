@@ -11,34 +11,9 @@
         </div>
 
         <div class="row stat-details">
-          <div class="col-sm-6 row nomargin">
-            <div class="col-sm-6 nopadding bold">Level</div>
-            <div class="col-sm-6 nopadding right">{{ skillDetails.level }}</div>
-          </div>
-
-          <div class="col-sm-6 row nomargin">
-            <div class="col-sm-6 nopadding bold">Target</div>
-            <div class="col-sm-6 nopadding right">{{ skillDetails.target }}</div>
-          </div>
-
-          <div class="col-sm-12 row nomargin">
-            <div class="col-sm-3 nopadding bold">Type</div>
-            <div class="col-sm-8 offset-sm-1 nopadding left">{{ skillDetails.type }}</div>
-          </div>
-
-          <div class="col-sm-12 row nomargin">
-            <div class="col-sm-3 nopadding bold">Cost</div>
-            <div class="col-sm-8 offset-sm-1 nopadding left">{{ skillDetails.cost }}</div>
-          </div>
-          
-          <div class="col-sm-12 row nomargin" v-if="skill.damage > 0">
-            <div class="col-sm-3 nopadding bold">Damage</div>
-            <div class="col-sm-8 offset-sm-1 nopadding left">{{ skillDetails.damage }} {{ damageBasis }}</div>
-          </div>
-
-          <div class="col-sm-12 row nomargin" v-else>
-            <div class="col-sm-3 nopadding bold">Heal</div>
-            <div class="col-sm-8 offset-sm-1 nopadding left">{{ skillDetails.damage }} {{ damageBasis }}</div>
+          <div class="col-sm-12 row nomargin" v-for="(key,index) in Object.keys(skillDetails)" :key="index">
+            <div class="col-sm-3 nopadding bold">{{ key.toUpperCase() }}</div>
+            <div class="col-sm-8 offset-sm-1 nopadding left">{{ skillDetails[key] }}</div>
           </div>
         </div>
       </div>
@@ -57,11 +32,18 @@ export default {
     skillDetails: function() {
       const skill = {
         level: this.skill.lvlReq,
-        damage: Math.abs(this.skill.damage) + "%",
         target: this.skill.target,
+        type: this.skill.type === "P" ? "Physical" : "Magical",
         cost: this.skill.cost + " mana",
-        type: this.skill.type === "P" ? "Physical" : "Magical"
+        damage: this.skill.damage + "% " + this.damageBasis,
+        heal: Math.abs(this.skill.damage) + "% " + this.damageBasis
       };
+
+      if (this.skill.damage < 0) {
+        delete skill.damage;
+      } else {
+        delete skill.heal;
+      }
 
       return skill;
     },
@@ -74,10 +56,10 @@ export default {
 
 <style lang="scss" scoped>
 .skill-details {
-  height: 175px;
+  height: 200px;
 
   .stat-details {
-    padding: 3px;
+    padding: 10px;
   }
 }
 </style>
