@@ -1,6 +1,7 @@
 <template>
-  <div class="dungeon-tile">
-    {{ dungeon.name }}
+  <div class="dungeon-tile" 
+    :style="{ backgroundImage: `url(${backgroundImage})` }">
+    <img :src="overlayImage" class="locked-overlay" v-if="dungeon.locked" />
   </div>
 </template>
 
@@ -12,12 +13,17 @@ export default {
     },
     value: undefined
   },
+  computed: {
+    backgroundImage: function() {
+      return require(`../../../assets/images/dungeons/${this.dungeon.image}.jpg`);
+    },
+    overlayImage: function() {
+      return require(`../../../assets/images/dungeons/locked-overlay.png`);
+    }
+  },
   methods: {
     onDungeonClick: function() {
       this.$emit("input", this.dungeon);
-    },
-    backgroundImage: function() {
-      return `../../../assets/images/dungeons/${this.dungeon.image}.jpg`;
     }
   }
 }
@@ -31,5 +37,10 @@ export default {
   background-size: cover;
   background-image: url('../../../assets/images/dungeons/beast-den.jpg');
   cursor: pointer;
+
+  .locked-overlay {
+    height: 150px;
+    width: 300px;
+  }
 }
 </style>
