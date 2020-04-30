@@ -43,8 +43,11 @@
       <div class="col-sm-6 nopadding">
         <div class="center bold">Skills</div>
         <div class="row nomargin" v-for="skill in character.skills" :key="skill._id">
-          <div class="col-sm-8 offset-sm-2">{{ skill.name }}</div>
-          <div class="col-sm-2 bold">({{ skill.type }})</div>
+          <div class="col-sm-2 offset-sm-2 nopadding right">
+            <v-svg v-if="skill.type == 'P'" icon="PHYSICAL"></v-svg>
+            <v-svg v-else icon="MAGICAL"></v-svg>
+          </div>
+          <div class="col-sm-8">{{ skill.name }}</div>
         </div>
       </div>
     </div>
