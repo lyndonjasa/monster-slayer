@@ -21,6 +21,10 @@
         <app-item-details headerText="Selected Item" :item="selected"></app-item-details>
         <app-item-details headerText="Current Equipment" :item="currentItem"></app-item-details>
         <div class="inventory-actions">
+          <v-icon icon="exclamation-triangle" 
+            v-if="disableEquipButton"
+            class="action-warning"></v-icon>
+          <div class="warning-message dark-bg">{{ warningMessage }}</div>
           <button class="btn-principal" 
             :disabled="disableEquipButton"
             @click="onEquip">Equip</button>
@@ -102,6 +106,13 @@ export default {
     },
     hasChanges: function() {
       return !_.isEqual(this.character, this.charCopy);
+    },
+    warningMessage: function() {
+      if (!this.selected) {
+        return "Select an item to equip";
+      } else {
+        return "Item not suitable to class";
+      }
     }
   },
   methods: {
@@ -146,6 +157,27 @@ export default {
     margin-top: 10px;
     font-family: AtariClassic;
     text-align: center;
+
+    .action-warning {
+      position: absolute;
+      left: 8px;
+      bottom: 70px;
+    }
+
+    .warning-message {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      position: absolute;
+      z-index: 5;
+      border: 1px solid white;
+      border-radius: 5px;
+      padding: 5px;
+      left: 35px;
+      display: none;
+    }
+
+    .action-warning:hover + .warning-message {
+      display: block;
+    }
 
     button {
       width: 200px; 
