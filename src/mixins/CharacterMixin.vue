@@ -20,6 +20,9 @@ export default {
     updateSkills: function(characterId, request) {
       return this.$http.put(`${baseUrl}/${characterId}/skills`, request);
     },
+    getDungeonAccess: function(characterId) {
+      return this.$http.get(`${baseUrl}/${characterId}/dungeons`).then(res => res.json());
+    }
   }
 }
 </script>
