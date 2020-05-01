@@ -11,11 +11,11 @@
       </div>
     </app-battle-stage>
 
-    <app-action-pane :skills="player.skills"></app-action-pane>
+    <app-action-pane v-if="playerTurn" :skills="player.skills"></app-action-pane>
 
     <div class="pane row nomargin">
       <div class="col-sm-3 nopadding">
-        <app-status-pane :stats="player.stats"></app-status-pane>
+        <app-status-pane v-if="player" :stats="player.stats"></app-status-pane>
       </div>
       <div class="col-sm-9 nopadding">
         <app-battle-notification :message="battleMessage">
@@ -47,7 +47,8 @@ export default {
   },
   data: function() {
     return {
-      battleMessage: ""
+      battleMessage: "",
+      playerTurn: false
     }
   }
 }
