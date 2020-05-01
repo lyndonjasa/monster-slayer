@@ -13,7 +13,7 @@
       </div>
 
       <div class="col-sm-6 nopadding">
-        <app-dungeon-details></app-dungeon-details>
+        <app-dungeon-details :dungeon="selectedDungeon" @enter-dungeon="enterDungeon"></app-dungeon-details>
       </div>
     </div>
   </app-layout>
@@ -53,9 +53,9 @@ export default {
       characterId: "character"
     })
   },
-  watch: {
-    selectedDungeon: function(value) {
-      console.log(value);
+  methods: {
+    enterDungeon: function(dungeonId) {
+      this.$router.push(`/dungeons/${dungeonId}`);
     }
   }
 }

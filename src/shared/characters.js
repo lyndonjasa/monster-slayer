@@ -24,23 +24,37 @@ export function createPlayer(classId, name) {
 
 export function extractPlayer(character) {
   const player = {
-    actualHealth: character.stats.health,
-    totalHealth: character.stats.health,
     isPlayer: true,
-    mana: character.stats.mana,
-    totalMana: character.stats.mana,
     name: character.name,
-    showAlt: false
+    showAlt: false,
+    id: character._id
   }
 
   const className = classTypes.find(x => x.id === character.classType).name.toLowerCase();
-  debugger
   player["image"] = require(`../assets/images/classes/animated/${className}-atk.png`);
   player["altImage"] = require(`../assets/images/classes/animated/${className}-alt.png`);
 
   player["skills"] = character.skills
 
+  const stats = extractStats(character);
+  player.stats = stats
+  player.stats.totalHealth = stats.health;
+  player.stats.totalMana = stats.mana;
+
   return player;
+}
+
+function extractStats(player) {
+  const { stats } = player;
+  const { weapon, armor } = player.equipment;
+
+  const totalStats = {};
+  const keys = Object.keys(stats);
+  keys.forEach(key => {
+    totalStats[key] = stats[key] + armor.bonus[key] + weapon.bonus[key];
+  });
+
+  return totalStats;
 }
 
 export const enemy = {
@@ -74,3 +88,21 @@ export const enemy = {
     }
   ]
 };
+
+export function extractEnemy(character) {
+  const enemy = {
+    image: require(`../assets/images/enemies/${character.image}.png`),
+    altImage: require(`../assets/images/enemies/${character.image}-blink.png`),
+    isPlayer: false,
+    showAlt: false,
+    name: character.name,
+    id: character._id,
+    skills: character.skills,
+    stats: character.stats
+  };
+
+  character.stats.totalHealth = character.stats.health;
+  character.stats.totalMana = character.stats.mana;
+  
+  return enemy;
+}

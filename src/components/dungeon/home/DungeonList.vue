@@ -14,7 +14,8 @@ export default {
     slimScrollOptions: function() {
       return {
         height: "430px",
-        color: "#E4E1CB"
+        color: "#E4E1CB",
+        alwaysVisible: true
       };
     }
   }
