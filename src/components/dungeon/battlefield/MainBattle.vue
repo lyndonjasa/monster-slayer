@@ -38,6 +38,7 @@ import BattleNotification from "./BattleNotification";
 import ActionPane from "./ActionPane";
 import StatusPane from "./StatusPane";
 import { Calculator } from "../../../shared/damage-calculator";
+import { getRandomInt } from "../../../shared/randomizer";
 
 export default {
   components: {
@@ -55,7 +56,8 @@ export default {
   data: function() {
     return {
       battleMessage: "",
-      playerTurn: true
+      playerTurn: true,
+      enemyAction: 0,
     }
   },
   computed: {
@@ -70,14 +72,39 @@ export default {
     // Attack Command
     playerAttack: function() {
       this.attack(this.player, this.enemy);
+      this.react();
     },
     // Focus Command
     playerFocus: function() {
       this.focus(this.player);
+      this.react();
     },
     // Activate Skill
     playerActivateSkill: function(skill) {
       this.activateSkill(this.player, skill, this.enemy);
+      this.react();
+    },
+    react: function() {
+      this.playerTurn = false;
+      this.enemyAction = setTimeout(() => this.triggerEnemyAction(), 2000);
+      this.enemyAction;
+    },
+    triggerEnemyAction: function() {
+      // 0 Attack
+      // 1 Use Skill
+      const currentAction = getRandomInt(2);
+      if (currentAction === 0) {
+        this.attack(this.enemy, this.player); // Attack
+      } else {
+        const skillIndex = getRandomInt(this.enemy.skills.length);
+        if (this.enemy.skills[skillIndex].cost > this.enemyStats.mana) {
+          this.focus(this.enemy); // Focus
+        } else {
+          this.activateSkill(this.enemy, this.enemy.skills[skillIndex], this.player);
+        }
+      }
+
+      setTimeout(() => { this.playerTurn = true; }, 2000);
     },
     attack: function(character, opponent) {
       this.animateAction(character);
@@ -168,6 +195,16 @@ export default {
       handler: function(value) {
         if (value.stats.health <= 0) {
           value.stats.health = 0;
+          clearTimeout(this.enemyAction);
+        }
+      }
+    },
+    player: {
+      deep: true,
+      handler: function(value) {
+        if (value.stats.health <= 0) {
+          value.stats.health = 0;
+          this.playerTurn = false;
         }
       }
     }

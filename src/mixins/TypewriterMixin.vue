@@ -15,7 +15,7 @@ export default {
         if (i < message.length) {
           vm.notification += message.charAt(i);
           i++;
-          setTimeout(typeWriter, 30);
+          setTimeout(typeWriter, 20);
         }
       }
       
