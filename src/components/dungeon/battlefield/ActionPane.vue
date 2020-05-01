@@ -3,14 +3,18 @@
     <app-tile>
       <div class="actions row nomargin">
         <div class="col-sm-6 nopadding">
-          <button class="btn-principal">Attack</button>
+          <button class="btn-principal" @click="$emit('attack')">Attack</button>
         </div>
         <div class="col-sm-6 nopadding">
-          <button class="btn-principal">Focus</button>
+          <button class="btn-principal" @click="$emit('focus')">Focus</button>
         </div>
         <div class="col-sm-12 row nomargin nopadding" v-for="skill in skills" :key="skill._id">
           <div class="col-sm-10 nopadding">
-            <button class="btn-principal">{{ skill.name }}</button>
+            <button class="btn-principal" 
+              :disabled="disableSkill(skill.cost)"
+              @click="activateSkill(skill)">
+              {{ skill.name }}
+            </button>
           </div>
           <div class="col-sm-2 nopadding skill-cost">
             {{ skill.cost }}
@@ -23,10 +27,16 @@
 
 <script>
 export default {
-  props: ["skills"],
+  props: {
+    skills: { required: true },
+    mana: { required: true }
+  },
   methods: {
     activateSkill: function(skill) {
       this.$emit("activate-skill", skill);
+    },
+    disableSkill: function(cost) {
+      return cost > this.mana;
     }
   }
 }

@@ -1,8 +1,16 @@
 /**
- * @param {Number} max Maximum random value.
+ * @param {Number} max Maximum random value (Exclusive).
  */
 export function getRandomInt(max) {
   return Math.floor(Math.random() * Math.floor(max));
+}
+
+/**
+ * @param {Number} min Minimum random value (Inclusive).
+ * @param {Number} max Maximum random value (Inclusive).
+ */
+export function getRandomValueByRange(min, max) {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
 /**
