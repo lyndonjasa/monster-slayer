@@ -10,22 +10,45 @@
         </div>
       </div>
     </app-battle-stage>
+
+    <app-action-pane :skills="player.skills"></app-action-pane>
+
+    <div class="pane row nomargin">
+      <div class="col-sm-3 nopadding">
+        <app-status-pane></app-status-pane>
+      </div>
+      <div class="col-sm-9 nopadding">
+        <app-battle-notification :message="battleMessage">
+        </app-battle-notification>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
 import BattleStage from "./BattleStage";
 import Combatant from "./Combatant";
+import BattleNotification from "./BattleNotification";
+import ActionPane from "./ActionPane";
+import StatusPane from "./StatusPane";
 
 export default {
   components: {
     appBattleStage: BattleStage,
-    appCombatant: Combatant
+    appCombatant: Combatant,
+    appBattleNotification: BattleNotification,
+    appActionPane: ActionPane,
+    appStatusPane: StatusPane
   },
   props: {
     dungeon: { required: true },
     enemy: { required: true },
     player: { required: true }
+  },
+  data: function() {
+    return {
+      battleMessage: ""
+    }
   }
 }
 </script>
