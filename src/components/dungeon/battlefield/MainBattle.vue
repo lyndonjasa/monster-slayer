@@ -68,25 +68,30 @@ export default {
       return this.enemy.stats;
     }
   },
+  mounted: function() {
+    if (this.enemyStats.agi > this.playerStats.agi) {
+      this.react(1000);
+    }
+  },
   methods: {
     // Attack Command
     playerAttack: function() {
       this.attack(this.player, this.enemy);
-      this.react();
+      this.react(2000);
     },
     // Focus Command
     playerFocus: function() {
       this.focus(this.player);
-      this.react();
+      this.react(2000);
     },
     // Activate Skill
     playerActivateSkill: function(skill) {
       this.activateSkill(this.player, skill, this.enemy);
-      this.react();
+      this.react(2000);
     },
-    react: function() {
+    react: function(timeout) {
       this.playerTurn = false;
-      this.enemyAction = setTimeout(() => this.triggerEnemyAction(), 2000);
+      this.enemyAction = setTimeout(() => this.triggerEnemyAction(), timeout);
       this.enemyAction;
     },
     triggerEnemyAction: function() {
@@ -149,10 +154,21 @@ export default {
       // check if attack misses
       if (!Calculator.hasMissed(character.stats.agi, opponent.stats.agi) && skill.target == "enemy") {
         message += `Missed!`
+      } else if (skill.target == "self") { // support skills
+        const dmgBasis = skill.type == "P" ? character.stats.off : character.stats.int;
+        const points = Calculator.calculateSkillDamage(skill, dmgBasis, 0);
+        character.stats.health -= points;
+        if (character.stats.health > character.stats.totalHealth) {
+          character.stats.health = character.stats.totalHealth;
+        }
+
+        message += `Gained ${Math.abs(points)} hit points!`;
       } else {
         // check if skills is physical or magical
         const dmgBasis = skill.type == "P" ? character.stats.off : character.stats.int;
         let damage = Calculator.calculateSkillDamage(skill, dmgBasis, opponent.stats.def);
+        // reset to 0 if negative
+        damage = damage > 0 ? damage : 0;
         // check if critical hit
         if (Calculator.isCrit(character.stats.luk)) {
           damage = Math.ceil(damage * 1.5);

@@ -24,7 +24,7 @@ export class Calculator {
     const multiplier = skill.damage / 100;
     const totalDamage = Math.ceil(damage * multiplier);
 
-    return totalDamage > 0 ? totalDamage : 0;
+    return totalDamage;
   }
 
   /**

@@ -3,7 +3,11 @@
     <app-loader v-if="showLoader" loadingMessage="Loading Battlefield"></app-loader>
 
     <div class="dungeon-battlefield-container">
-      <app-main-battle :player="player" :enemy="enemy" :dungeon="dungeon"></app-main-battle>
+      <app-main-battle
+        v-if="player && enemy"
+        :player="player" 
+        :enemy="enemy" 
+        :dungeon="dungeon"></app-main-battle>
     </div>
   </app-layout>
 </template>
