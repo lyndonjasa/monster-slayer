@@ -3,7 +3,7 @@
     <app-loader v-if="showLoader" loadingMessage="Loading Battlefield"></app-loader>
 
     <div class="dungeon-battlefield-container">
-
+      <app-main-battle :player="player" :enemy="enemy" :dungeon="dungeon"></app-main-battle>
     </div>
   </app-layout>
 </template>
@@ -13,8 +13,12 @@ import { mapGetters } from "vuex";
 import CharacterMixin from "../../mixins/CharacterMixin";
 import DungeonMixin from "../../mixins/DungeonMixin";
 import { extractPlayer, extractEnemy } from "../../shared/characters";
+import MainBattle from "../../components/dungeon/battlefield/MainBattle";
 
 export default {
+  components: {
+    appMainBattle: MainBattle
+  },
   created: function() {
     this.showLoader = true;
     this.getCharacterById(this.characterId).then(res => {
