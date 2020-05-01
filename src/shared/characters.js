@@ -27,7 +27,8 @@ export function extractPlayer(character) {
     isPlayer: true,
     name: character.name,
     showAlt: false,
-    id: character._id
+    id: character._id,
+    level: character.level
   }
 
   const className = classTypes.find(x => x.id === character.classType).name.toLowerCase();
@@ -98,7 +99,8 @@ export function extractEnemy(character) {
     name: character.name,
     id: character._id,
     skills: character.skills,
-    stats: character.stats
+    stats: character.stats,
+    level: character.level
   };
 
   character.stats.totalHealth = character.stats.health;

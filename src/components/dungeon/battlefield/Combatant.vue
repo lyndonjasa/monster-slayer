@@ -1,6 +1,12 @@
 <template>
   <div class="combatant-container">
     <div class="status-bar-container">
+      <app-status-bar v-if="combatant"
+        :remainingHealthPercentage="remainingHealthPercentage"
+        :remainingManaPercentage="remainingManaPercentage"
+        :name="combatant.name"
+        :level="combatant.level"
+      ></app-status-bar>
     </div>
 
     <div class="character-image-container">
@@ -20,7 +26,12 @@
 </template>
 
 <script>
+import StatusBar from "./StatusBar";
+
 export default {
+  components: {
+    appStatusBar: StatusBar
+  },
   props: {
     combatant: { required: true }
   },
