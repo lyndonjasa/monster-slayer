@@ -5,16 +5,13 @@
     <div class="character-inventory row nomargin">
       <div class="col-sm-8 nopadding">
         <app-tile>
-          <div class="row nomargin item-tiles-container" v-if="inventory.length <= 18">
-            <div v-for="item in inventory" :key="item._id" class="col-sm-6 tile">
-              <app-item-tile :item="item" v-model="selectedItem"></app-item-tile>
-            </div> 
-          </div>
-          <div class="row nomargin item-tiles-container" v-else v-slimscroll="slimScrollOptions">
-            <div v-for="item in inventory" :key="item._id" class="col-sm-6 tile">
-              <app-item-tile :item="item" v-model="selectedItem"></app-item-tile>
+          <vue-scroll :ops="scrollOptions">
+            <div class="row nomargin item-tiles-container">
+              <div v-for="item in inventory" :key="item._id" class="col-sm-6 tile">
+                <app-item-tile :item="item" v-model="selectedItem"></app-item-tile>
+              </div>
             </div>
-          </div>
+          </vue-scroll>
         </app-tile>
       </div>
       <div class="col-sm-4 nopadding">
@@ -79,11 +76,17 @@ export default {
     ...mapGetters({
       characterId: 'character'
     }),
-    slimScrollOptions: function() {
+    scrollOptions: function() {
       return {
-        height: "448px",
-        color: "#E4E1CB"
-      };
+          scrollPanel: {
+            scrollingX: false
+          },
+          bar: {
+            keepShow: true,
+            background: "#E4E1CB",
+            opacity: 0.5
+          }
+        };
     },
     disableEquipButton: function() {
       if (!this.selectedItem) return true;
