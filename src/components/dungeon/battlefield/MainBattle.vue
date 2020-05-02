@@ -200,7 +200,7 @@ export default {
         const dmgBasis = skill.type == "P" ? character.stats.off : character.stats.int;
         let damage = Calculator.calculateSkillDamage(skill, dmgBasis, opponent.stats.def);
         // reset to 0 if negative
-        damage = damage > 0 ? damage : 0;
+        damage = damage > 0 ? damage : 1;
         // check if critical hit
         if (Calculator.isCrit(character.stats.luk)) {
           damage = Math.ceil(damage * 1.5);

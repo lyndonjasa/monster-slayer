@@ -10,7 +10,7 @@ export class Calculator {
     // offense less than 75% defense
     const damage = Math.ceil(offense - (0.75 * defense));
 
-    return damage > 0 ? damage : 0;
+    return damage > 0 ? damage : 1;
   }
 
   /**
