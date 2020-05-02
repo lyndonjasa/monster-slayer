@@ -20,6 +20,9 @@
             {{ skill.cost }}
           </div>
         </div>
+        <div class="col-sm-6 nopadding">
+          <button class="btn-principal" @click="$emit('run-away')">Run Away</button>
+        </div>
       </div>
     </app-tile>
   </div>
@@ -46,14 +49,14 @@ export default {
 .action-pane-container {
   position: absolute;
   min-width: 230px;
-  max-width: 350px;
+  max-width: 295px;
   right: calc(50vw + 220px);
-  top: 250px;
+  top: 220px;
   border-radius: 8px;
 
   .actions {
     font-family: AtariClassic;
-    font-size: 12px;
+    font-size: 10px;
 
     .skill-cost {
       padding-top: 15px !important;

@@ -1,5 +1,7 @@
 <template>
   <div class="main-battle-container">
+    <app-dungeon-re-enter v-if="showReEnterOptions" @re-enter="onReEnter($event)"></app-dungeon-re-enter>
+
     <app-battle-stage v-if="dungeon" :image="dungeon.image">
       <div class="dungeon-field row nomargin">
         <div class="col-sm-6 nopadding">
@@ -16,7 +18,8 @@
       :mana="player.stats.mana"
       @attack="playerAttack"
       @focus="playerFocus"
-      @activate-skill="playerActivateSkill">
+      @activate-skill="playerActivateSkill"
+      @run-away="showReEnterOptions = true">
     </app-action-pane>
 
     <div class="pane row nomargin">
@@ -39,6 +42,7 @@ import ActionPane from "./ActionPane";
 import StatusPane from "./StatusPane";
 import { Calculator } from "../../../shared/damage-calculator";
 import { getRandomInt } from "../../../shared/randomizer";
+import DungeonReEnter from "./DungeonReEnter";
 
 export default {
   components: {
@@ -46,7 +50,8 @@ export default {
     appCombatant: Combatant,
     appBattleNotification: BattleNotification,
     appActionPane: ActionPane,
-    appStatusPane: StatusPane
+    appStatusPane: StatusPane,
+    appDungeonReEnter: DungeonReEnter
   },
   props: {
     dungeon: { required: true },
@@ -58,7 +63,8 @@ export default {
       battleMessage: "",
       playerTurn: true,
       enemyAction: 0,
-      playerAction: 0
+      playerAction: 0,
+      showReEnterOptions: false
     }
   },
   computed: {
@@ -75,6 +81,13 @@ export default {
     }
   },
   methods: {
+    onReEnter: function(condition) {
+      if (condition) { // re-enter
+        this.$router.go();
+      } else { // back to dungeons screen
+        this.$router.push("/dungeons");
+      }
+    },
     // Attack Command
     playerAttack: function() {
       this.attack(this.player, this.enemy);
@@ -226,6 +239,7 @@ export default {
           value.stats.health = 0;
           this.playerTurn = false;
           clearTimeout(this.playerAction);
+          this.showReEnterOptions = true;
         }
       }
     }
