@@ -33,7 +33,7 @@ export class Calculator {
    * @param {Number} opponentAgi 
    */
   static hasMissed(proponentAgi, opponentAgi) {
-    const maxProbability = proponentAgi + opponentAgi;
+    const maxProbability = proponentAgi + (opponentAgi * 0.75);
 
     const roll = getRandomValueByRange(1, maxProbability);
 

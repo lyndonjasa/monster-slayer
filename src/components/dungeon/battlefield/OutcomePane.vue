@@ -1,8 +1,8 @@
 <template>
   <div class="battle-outcome-overlay">
-    <div class="battle-outcome-pane dark-bg">
+    <div class="battle-outcome-pane dark-bg" v-if="outcome">
       <div class="pane-header">Battle Results</div>
-      <div class="lvlup-message">
+      <div class="lvlup-message" v-if="outcome.lvlUp">
         {{ notification }}
       </div>
       <div class="outcome-details row nomargin">
@@ -46,9 +46,7 @@ export default {
   },
   mixins: [TypewriterMixin],
   mounted: function() {
-    if (this.outcome.lvlUp) {
-      this.writeNotification("LEVEL UP !!!", 100);
-    }
+    this.writeNotification("LEVEL UP !!!", 100);
   }
 }
 </script>

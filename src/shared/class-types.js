@@ -62,8 +62,8 @@ export const classTypes = [
     details: "Has low combat abilities but capitalizes on destructive magecraft",
     weapons: "Staffs",
     stats: {
-      off: "E",
-      def: "D",
+      off: "D",
+      def: "E",
       agi: "B",
       int: "S",
       luk: "C"
