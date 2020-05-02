@@ -5,8 +5,10 @@ Vue.use(Vuex);
 
 export const store = new Vuex.Store({
   state: {
-    accountId: "5ea98aebda11384fb4cbbd22",
-    characterId: "5ea98aebda11384fb4cbbd23"
+    // accountId: "5ea98aebda11384fb4cbbd22",
+    // characterId: "5ea98aebda11384fb4cbbd23"
+    accountId: "",
+    characterId: ""
   },
   getters: {
     account: (state) => {
@@ -22,6 +24,13 @@ export const store = new Vuex.Store({
     },
     setCharacter: (state, id) => {
       state.characterId = id;
+    },
+    sessionLogin: (state) => {
+      const accountId = Vue.prototype.$session.get("account");
+      const characterId = Vue.prototype.$session.get("character");
+
+      state.accountId = accountId;
+      state.characterId = characterId;
     }
   }
 });

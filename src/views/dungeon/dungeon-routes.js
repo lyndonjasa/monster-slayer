@@ -1,14 +1,17 @@
 import DungeonHome from "./Home";
 import Battlefield from "./Battlefield";
+import { isAuthorized } from "../../shared/session-guard";
 
 const routes = [
   {
     path: "/dungeons",
-    component: DungeonHome
+    component: DungeonHome,
+    beforeEnter: isAuthorized
   },
   {
     path: "/dungeons/:id",
-    component: Battlefield
+    component: Battlefield,
+    beforeEnter: isAuthorized
   }
 ];
 

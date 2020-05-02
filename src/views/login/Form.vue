@@ -126,6 +126,7 @@ export default {
     },
     login: function(accountId) {
       this.$store.commit("setAccount", accountId);
+      this.$session.set("account", accountId);
       this.$router.push('/character');
     }
   }

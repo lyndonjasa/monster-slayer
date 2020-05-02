@@ -1,19 +1,23 @@
 import CharacterHome from "./Home";
 import Inventory from "./Inventory";
 import Skills from "./Skills";
+import { isAuthorized } from "../../shared/session-guard";
 
 const routes = [
   {
     path: "/character",
-    component: CharacterHome
+    component: CharacterHome,
+    beforeEnter: isAuthorized
   },
   {
     path: "/character/inventory",
-    component: Inventory
+    component: Inventory,
+    beforeEnter: isAuthorized
   },
   {
     path: "/character/skills",
-    component: Skills
+    component: Skills,
+    beforeEnter: isAuthorized
   }
 ];
 

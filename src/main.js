@@ -14,6 +14,7 @@ import { store } from "./store";
 import VueSVGIcon from "vue-svgicon";
 import "./assets/icons";
 import VueScroll from "vuescroll";
+import VueSession from "vue-session";
 
 library.add(fas);
 Vue.component('v-icon', FontAwesomeIcon);
@@ -25,6 +26,7 @@ Vue.use(VueSVGIcon, {
   tagName: "v-svg"
 });
 Vue.use(VueScroll);
+Vue.use(VueSession);
 
 new Vue({
   router,

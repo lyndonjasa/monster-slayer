@@ -32,6 +32,7 @@ export default {
       this.character = res;
 
       this.$store.commit("setCharacter", res._id);
+      this.$session.set("character", res._id);
     });
   },
   computed: {
