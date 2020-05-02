@@ -46,6 +46,7 @@ import { Calculator } from "../../../shared/damage-calculator";
 import { getRandomInt } from "../../../shared/randomizer";
 import DungeonReEnter from "./DungeonReEnter";
 import OutcomePane from "./OutcomePane";
+import DungeonMixin from "../../../mixins/DungeonMixin";
 
 export default {
   components: {
@@ -57,6 +58,7 @@ export default {
     appDungeonReEnter: DungeonReEnter,
     appOutcomePane: OutcomePane
   },
+  mixins: [DungeonMixin],
   props: {
     dungeon: { required: true },
     enemy: { required: true },
@@ -153,7 +155,11 @@ export default {
           message += `Dealt ${damage} hit points!`;
         }
 
-        opponent.stats.health -= damage;
+        if (opponent.stats.health - damage < 0) {
+          opponent.stats.health = 0;
+        } else {
+          opponent.stats.health -= damage;
+        }
       }
 
       this.writeBattleMessage(message);
@@ -203,7 +209,11 @@ export default {
           message += `Dealt ${damage} hit points!`;
         }
 
-        opponent.stats.health -= damage;
+        if (opponent.stats.health - damage < 0) {
+          opponent.stats.health = 0;
+        } else {
+          opponent.stats.health -= damage;
+        }
       }
 
       this.writeBattleMessage(message);
@@ -236,19 +246,25 @@ export default {
       deep: true,
       handler: function(value) {
         if (value.stats.health <= 0) {
-          value.stats.health = 0;
           clearTimeout(this.enemyAction);
 
           setTimeout(() => {
             // add call for levelup
             // this.showReEnterOptions = true;
-            this.battleOutcome = {
-              exp: 700,
-              lvlUp: false,
-              drop: "",
-              newSkills: [],
-              unlockedDungeons: []
-            }
+            console.log(this.player.id, this.enemy.id, this.dungeon._id);
+            this.showLoader = true;
+            this.battleSet(this.dungeon._id, this.player.id, this.enemy.id).then(res => {
+              this.battleOutcome = res;
+              this.showLoader = false;
+              this.showOutcomePane = true;
+            });
+            // this.battleOutcome = {
+            //   exp: 700,
+            //   lvlUp: false,
+            //   drop: "",
+            //   newSkills: [],
+            //   unlockedDungeons: []
+            // }
 
             this.showOutcomePane = true;
           }, 2000);
