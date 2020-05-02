@@ -73,7 +73,7 @@ export default {
     },
     disableEquipButton: function() {
       if (!this.selectedSkill) return true;
-      if (this.skills.length >= 4) return true;
+      if (this.character.skills.length >= 4) return true;
 
       const id = this.selectedSkill._id;
       const skill = this.character.skills.find(x => x._id === id);
