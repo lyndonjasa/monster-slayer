@@ -2,7 +2,7 @@
   <div class="main-battle-container">
     <app-loader v-if="showLoader" loadingMessage="Now Loading"></app-loader>
     <app-dungeon-re-enter v-if="showReEnterOptions" @re-enter="onReEnter($event)"></app-dungeon-re-enter>
-    <app-outcome-pane v-if="showOutcomePane" :outcome="testOutcome" @close="onOutcomeClose"></app-outcome-pane>
+    <app-outcome-pane v-if="showOutcomePane" :outcome="battleOutcome" @close="onOutcomeClose"></app-outcome-pane>
 
     <app-battle-stage v-if="dungeon" :image="dungeon.image">
       <div class="dungeon-field row nomargin">
@@ -70,7 +70,8 @@ export default {
       playerAction: 0,
       showReEnterOptions: false,
       showOutcomePane: false,
-      showLoader: false
+      showLoader: false,
+      battleOutcome: undefined
     }
   },
   computed: {
@@ -79,15 +80,6 @@ export default {
     },
     enemyStats: function() {
       return this.enemy.stats;
-    },
-    testOutcome: function() {
-      return {
-          exp: 700,
-          lvlUp: false,
-          drop: "",
-          newSkills: [],
-          unlockedDungeons: []
-      }
     }
   },
   mounted: function() {
@@ -250,6 +242,14 @@ export default {
           setTimeout(() => {
             // add call for levelup
             // this.showReEnterOptions = true;
+            this.battleOutcome = {
+              exp: 700,
+              lvlUp: false,
+              drop: "",
+              newSkills: [],
+              unlockedDungeons: []
+            }
+
             this.showOutcomePane = true;
           }, 2000);
         }
