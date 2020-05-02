@@ -1,9 +1,11 @@
 <template>
   <div class="dungeon-list">
     <app-tile>
-      <div class="dungeon-tiles-container center" v-slimscroll="slimScrollOptions">
-        <slot></slot>
-      </div>
+      <vue-scroll :ops="scrollOptions">
+        <div class="dungeon-tiles-container center">
+          <slot></slot>
+        </div>
+      </vue-scroll>
     </app-tile>
   </div>
 </template>
@@ -11,12 +13,17 @@
 <script>
 export default {
   computed: {
-    slimScrollOptions: function() {
+    scrollOptions: function() {
       return {
-        height: "430px",
-        color: "#E4E1CB",
-        alwaysVisible: true
-      };
+          scrollPanel: {
+            scrollingX: false
+          },
+          bar: {
+            keepShow: true,
+            background: "#E4E1CB",
+            opacity: 0.5
+          }
+        };
     }
   }
 }

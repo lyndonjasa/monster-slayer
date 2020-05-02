@@ -24,6 +24,7 @@
     "vue-slimscroll": "^1.0.1",
     "vue-svgicon": "^3.2.6",
     "vuelidate": "^0.7.5",
+    "vuescroll": "^4.15.0",
     "vuex": "^3.3.0"
   },
   "browserslist": [

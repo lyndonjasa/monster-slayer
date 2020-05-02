@@ -58,6 +58,7 @@ export default {
       battleMessage: "",
       playerTurn: true,
       enemyAction: 0,
+      playerAction: 0
     }
   },
   computed: {
@@ -109,7 +110,8 @@ export default {
         }
       }
 
-      setTimeout(() => { this.playerTurn = true; }, 2000);
+      this.playerAction = setTimeout(() => { this.playerTurn = true; }, 2000);
+      this.playerAction;
     },
     attack: function(character, opponent) {
       this.animateAction(character);
@@ -212,6 +214,8 @@ export default {
         if (value.stats.health <= 0) {
           value.stats.health = 0;
           clearTimeout(this.enemyAction);
+
+          // add method here for winning
         }
       }
     },
@@ -221,6 +225,7 @@ export default {
         if (value.stats.health <= 0) {
           value.stats.health = 0;
           this.playerTurn = false;
+          clearTimeout(this.playerAction);
         }
       }
     }
