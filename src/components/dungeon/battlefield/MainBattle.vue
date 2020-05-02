@@ -1,5 +1,6 @@
 <template>
   <div class="main-battle-container">
+    <app-loader v-if="showLoader" loadingMessage="Now Loading"></app-loader>
     <app-dungeon-re-enter v-if="showReEnterOptions" @re-enter="onReEnter($event)"></app-dungeon-re-enter>
 
     <app-battle-stage v-if="dungeon" :image="dungeon.image">
@@ -64,7 +65,8 @@ export default {
       playerTurn: true,
       enemyAction: 0,
       playerAction: 0,
-      showReEnterOptions: false
+      showReEnterOptions: false,
+      showLoader: false
     }
   },
   computed: {
@@ -228,7 +230,10 @@ export default {
           value.stats.health = 0;
           clearTimeout(this.enemyAction);
 
-          // add method here for winning
+          setTimeout(() => {
+            // add call for levelup
+            this.showReEnterOptions = true;
+          }, 2000);
         }
       }
     },
@@ -239,7 +244,10 @@ export default {
           value.stats.health = 0;
           this.playerTurn = false;
           clearTimeout(this.playerAction);
-          this.showReEnterOptions = true;
+
+          setTimeout(() => {
+            this.showReEnterOptions = true;
+          }, 2000);
         }
       }
     }
