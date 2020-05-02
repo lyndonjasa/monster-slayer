@@ -31,6 +31,10 @@ export const store = new Vuex.Store({
 
       state.accountId = accountId;
       state.characterId = characterId;
+    },
+    sessionLogout: (state) => {
+      Vue.prototype.$session.clear();
+      Vue.prototype.$session.destroy();
     }
   }
 });

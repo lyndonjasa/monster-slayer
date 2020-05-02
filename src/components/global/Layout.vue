@@ -22,6 +22,11 @@
           Dungeons
         </button>
       </router-link>
+      <button
+        class="btn-principal logout-button"
+        @click="logout">
+        Logout
+      </button>
     </div>
 
     <div class="app-header row nomargin">
@@ -64,6 +69,11 @@ export default {
   methods: {
     reRoute: function(route) {
       this.$router.push(route);
+    },
+    logout: function() {
+      this.$store.commit("sessionLogout");
+      this.$router.go();
+      this.$router.push("/login");
     }
   }
 }
@@ -79,6 +89,10 @@ export default {
   .app-links {
     button {
       font-family: AtariClassic;
+    }
+
+    .logout-button {
+      float: right;
     }
 
     .active-route {
