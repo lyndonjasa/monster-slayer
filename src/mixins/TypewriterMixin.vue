@@ -6,7 +6,7 @@ export default {
     }
   },
   methods: {
-    writeNotification: function(message) {
+    writeNotification: function(message, delay=20) {
       let i = 0;
       let vm = this;
       this.notification = '';
@@ -15,7 +15,7 @@ export default {
         if (i < message.length) {
           vm.notification += message.charAt(i);
           i++;
-          setTimeout(typeWriter, 20);
+          setTimeout(typeWriter, delay);
         }
       }
       
