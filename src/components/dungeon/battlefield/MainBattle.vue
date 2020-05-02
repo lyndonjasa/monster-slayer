@@ -249,23 +249,12 @@ export default {
           clearTimeout(this.enemyAction);
 
           setTimeout(() => {
-            // add call for levelup
-            // this.showReEnterOptions = true;
-            console.log(this.player.id, this.enemy.id, this.dungeon._id);
             this.showLoader = true;
             this.battleSet(this.dungeon._id, this.player.id, this.enemy.id).then(res => {
               this.battleOutcome = res;
               this.showLoader = false;
               this.showOutcomePane = true;
             });
-            // this.battleOutcome = {
-            //   exp: 700,
-            //   lvlUp: false,
-            //   drop: "",
-            //   newSkills: [],
-            //   unlockedDungeons: []
-            // }
-
             this.showOutcomePane = true;
           }, 2000);
         }
