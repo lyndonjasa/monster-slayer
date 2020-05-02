@@ -13,7 +13,6 @@ import router from "./views/routes";
 import { store } from "./store";
 import VueSVGIcon from "vue-svgicon";
 import "./assets/icons";
-import VueSlimScroll from "vue-slimscroll";
 import VueScroll from "vuescroll";
 
 library.add(fas);
@@ -25,7 +24,6 @@ Vue.use(VueRouter);
 Vue.use(VueSVGIcon, {
   tagName: "v-svg"
 });
-Vue.use(VueSlimScroll);
 Vue.use(VueScroll);
 
 new Vue({
