@@ -15,7 +15,11 @@
         </app-tile>
       </div>
       <div class="col-sm-4 nopadding">
-        <app-item-details headerText="Selected Item" :item="selected"></app-item-details>
+        <app-item-details headerText="Selected Item" 
+          :canRemove="canRemove"
+          :item="selected"
+          @remove-item="removeItem">
+        </app-item-details>
         <app-item-details headerText="Current Equipment" :item="currentItem"></app-item-details>
         <div class="inventory-actions">
           <v-icon icon="exclamation-triangle" 
@@ -69,7 +73,8 @@ export default {
       loadingMessage: "",
       inventory: [],
       selectedItem: undefined,
-      charCopy: undefined
+      charCopy: undefined,
+      canRemove: false
     };
   },
   computed: {
@@ -139,6 +144,36 @@ export default {
         this.showLoader = false;
         this.charCopy = _.cloneDeep(this.character);
       });
+    },
+    removeItem: function() {
+      const id = this.selectedItem._id;
+      this.inventory = this.inventory.filter(x => x._id != id);
+      this.selectedItem = undefined;
+    }
+  },
+  watch: {
+    selectedItem: function(value) {
+      // if value is undefined, do nothing
+      if (!value) {
+        this.canRemove = false;
+        return;
+      }
+
+      if (value.item.classId !== this.character.classType) {
+        this.canRemove = true;
+      } else if (value.item._id !== this.currentItem._id) {
+        // if selected item is not the same as the current worn item
+        this.canRemove = true;
+      } else {
+        // if current item has a duplicate, allow delete
+        const inventoryItems = this.inventory.map(x => x.item);
+        const duplicates = inventoryItems.filter(d => d._id == value.item._id);
+        if (duplicates.length > 1) {
+          this.canRemove = true;
+        } else {
+          this.canRemove = false;
+        }
+      }
     }
   }
 }

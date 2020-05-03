@@ -1,7 +1,10 @@
 <template>
   <div class="item-details">
     <app-tile>
-      <div class="details-header bold">{{ headerText }}</div>
+      <div class="details-header bold">
+        {{ headerText }}
+        <span class="delete-item" v-if="canRemove && item" @click="$emit('remove-item')"> (Delete)</span>
+      </div>
       <div class="stat-details" v-if="item">
         <div class="item-name bold">
           <v-svg :icon="itemIcon" class="item-icon"></v-svg>
@@ -28,7 +31,8 @@ export default {
     headerText: {
       required: true
     },
-    item: undefined
+    item: undefined,
+    canRemove: { default: false }
   },
   computed: {
     itemIcon: function() {
@@ -58,6 +62,15 @@ export default {
 
   .details-header {
     text-align: center;
+
+    .delete-item {
+      color: gray;
+      cursor: pointer;
+    }
+
+    .delete-item:hover {
+      color: white;
+    }
   }
 
   .item-name {
