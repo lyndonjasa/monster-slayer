@@ -147,8 +147,10 @@ export default {
     },
     removeItem: function() {
       const id = this.selectedItem._id;
-      this.inventory = this.inventory.filter(x => x._id != id);
-      this.selectedItem = undefined;
+      this.deleteItem(this.characterId, id).then(() => {
+        this.inventory = this.inventory.filter(x => x._id != id);
+        this.selectedItem = undefined;
+      });
     }
   },
   watch: {

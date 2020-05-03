@@ -14,6 +14,9 @@ export default {
     updateEquipment: function(characterId, request) {
       return this.$http.put(`${baseUrl}/${characterId}/equipment`, request);
     },
+    deleteItem: function(characterId, inventoryId) {
+      return this.$http.delete(`${baseUrl}/${characterId}/inventory/${inventoryId}`);
+    },
     getCharacterSkills: function(characterId) {
       return this.$http.get(`${baseUrl}/${characterId}/skills`).then(res => res.json());
     },
