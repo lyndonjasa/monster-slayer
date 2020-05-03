@@ -4,22 +4,11 @@
     <div v-if="!account" class="white-overlay"></div>
 
     <router-view />
-    <!-- <app-form 
-      v-if="!hasAccount"
-      @account-created="loadAccount($event)"
-      @on-login="loadAccount($event)">
-    </app-form> -->
-    <!-- <app-battle
-      v-else-if="hasAccount && playerAccount"
-      :player="playerAccount">
-    </app-battle> -->
   </div>
 </template>
 
 <script>
 import Start from "./components/Start";
-import Battle from "./components/Battle";
-import Form from "./views/login/Form";
 import { loadFromStore } from "./shared/storage-helper";
 import { createPlayer, extractPlayer } from "./shared/characters";
 import AccountMixin from "./mixins/AccoutMixin";
@@ -28,9 +17,7 @@ import { mapGetters } from "vuex";
 export default {
   name: 'app',
   components: {
-    appStart: Start,
-    appBattle: Battle,
-    appForm: Form
+    appStart: Start
   },
   mixins: [AccountMixin],
   computed: {
